@@ -7,11 +7,18 @@ class House():
         self.value = 0
         self.length = length
         self.width = width
-        self.bottom_left = bottom_left
+        self.bottom_left = 0
         self.bottom_right = 0
         self.top_left = 0
         self.top_right = 0
         self.neighbours = {}
+
+    def coordinates(self, bottom_left):
+        # generates the remaining coordinates 
+        self.bottom_left = bottom_left 
+        self.bottom_right = ((bottom_left[0] + self.width), bottom_left[1])
+        self.top_left = (bottom_left[0], (bottom_left[1] + self.length))
+        self.top_right = ((bottom_left[0] + self.width), (bottom_left[1] + self.length))
 
 class water():
     def __init__(self, type, uid, bottom_left, top_right):
@@ -31,3 +38,4 @@ class water():
                     waters[row['id']] = water("water", 0, row['bottom_left_xy'], row['top_right_xy'])
 
             return waters
+
