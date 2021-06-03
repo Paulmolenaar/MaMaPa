@@ -29,13 +29,14 @@ class water():
         self.top_left = 0
         self.top_right = top_right
 
-    def load_water(self, source_file):
+    def load_water(source_file):
             waters = {}
             with open(source_file, 'r') as in_file:
                 reader = csv.DictReader(in_file)
-
+                line = 0
                 for row in reader:
-                    waters[row['id']] = water("water", 0, row['bottom_left_xy'], row['top_right_xy'])
+                    waters[line] = water("water", 0, row['bottom_left_xy'], row['top_right_xy'])
+                    line = line + 1
 
             return waters
 
