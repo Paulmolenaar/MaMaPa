@@ -1,7 +1,7 @@
 from  code.classes.models import House, water 
-sys.path.append(".")
-
-from code.classes import house
 
 if __name__ == "__main__":
-    print("test")
+
+    a = water.load_water('docs/wijk_1.csv')
+    print(a.type)
+
