@@ -12,12 +12,41 @@ def visualisation(output):
     fig, ax = plt.subplots()
 
     for row in datapoints[1:len(datapoints)-1]:
-        bottom_left = row[1].split(',')
-        top_left = row[2].split(',')
-        top_right = row[3].split(',')
-        bottom_right = row[4].split(',')
-        ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
-                        int(top_left[0]) - int(bottom_left[0])))
+        if row[5].strip() == 'WATER':
+            bottom_left = row[1].split(',')
+            top_left = row[2].split(',')
+            top_right = row[3].split(',')
+            bottom_right = row[4].split(',')
+            ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'blue'))
+
+        if row[5].strip() == 'EENGEZINSWONING':
+            bottom_left = row[1].split(',')
+            top_left = row[2].split(',')
+            top_right = row[3].split(',')
+            bottom_right = row[4].split(',')
+            ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
+
+
+        if row[5].strip() == 'BUNGALOW':
+            bottom_left = row[1].split(',')
+            top_left = row[2].split(',')
+            top_right = row[3].split(',')
+            bottom_right = row[4].split(',')
+            ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
+
+
+        if row[5].strip() == 'MAISON':
+            bottom_left = row[1].split(',')
+            top_left = row[2].split(',')
+            top_right = row[3].split(',')
+            bottom_right = row[4].split(',')
+            ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
+
+
 
     plt.title('Amstelhaege', fontsize=20)
     plt.xlim(0,180)
