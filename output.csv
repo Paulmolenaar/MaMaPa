@@ -1,3 +1,6 @@
 structure,corner_1,corner_2,corner_3,corner_4,type
 water_1,"0,0","180,0","180,32","0,32",WATER
+eengezinswoning_1,"40,121","32,121","32,129","40,129",EENGEZINSWONING
+maison_12,"32,74","32,64","44,64","44,74",MAISON
+bungalow_1,"10,32","3,32","3,43","10,43",BUNGALOW
 networth,0
