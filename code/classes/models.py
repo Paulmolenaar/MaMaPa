@@ -35,8 +35,18 @@ class water():
                 reader = csv.DictReader(in_file)
                 line = 0
                 for row in reader:
-                    waters[line] = water("water", 0, row['bottom_left_xy'], row['top_right_xy'])
+                    waters[line] = water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
                     line = line + 1
 
             return waters
+
+    def corners(self):
+        x = self.bottom_left.split(",")
+        #0,0
+        y = self.top_right.split(",")
+        #180,32
+        self.bottom_right = f"{int(x[0]) + int(y[0])},{int(x[1])}"
+        self.top_left = f"{int(x[0])},{int(x[1]) + int(y[1])}"
+        return 1
+
 

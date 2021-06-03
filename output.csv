@@ -1,0 +1,3 @@
+structure,corner_1,corner_2,corner_3,corner_4,type
+water_1,"0,0","180,0","180,32","0,32",WATER
+networth,0
