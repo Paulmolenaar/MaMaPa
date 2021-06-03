@@ -12,37 +12,21 @@ def visualisation(output):
     fig, ax = plt.subplots()
 
     for row in datapoints[1:len(datapoints)-1]:
-        if row[5].strip() == 'WATER':
-            bottom_left = row[1].split(',')
-            top_left = row[2].split(',')
-            top_right = row[3].split(',')
-            bottom_right = row[4].split(',')
+        bottom_left = row[1].split(',')
+        top_left = row[2].split(',')
+        top_right = row[3].split(',')
+        bottom_right = row[4].split(',')
+        type_house = row[5].strip()
+        if type_house == 'WATER':
             ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
                             int(top_left[0]) - int(bottom_left[0]), facecolor = 'blue'))
-
-        if row[5].strip() == 'EENGEZINSWONING':
-            bottom_left = row[1].split(',')
-            top_left = row[2].split(',')
-            top_right = row[3].split(',')
-            bottom_right = row[4].split(',')
+        elif type_house == 'EENGEZINSWONING':
             ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
-                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
-
-
-        if row[5].strip() == 'BUNGALOW':
-            bottom_left = row[1].split(',')
-            top_left = row[2].split(',')
-            top_right = row[3].split(',')
-            bottom_right = row[4].split(',')
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'red'))
+        elif type_house == 'BUNGALOW':
             ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
-                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
-
-
-        if row[5].strip() == 'MAISON':
-            bottom_left = row[1].split(',')
-            top_left = row[2].split(',')
-            top_right = row[3].split(',')
-            bottom_right = row[4].split(',')
+                            int(top_left[0]) - int(bottom_left[0]), facecolor = 'green'))
+        elif type_house == 'MAISON':
             ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[1]) - int(bottom_left[1]),
                             int(top_left[0]) - int(bottom_left[0]), facecolor = 'brown'))
 
