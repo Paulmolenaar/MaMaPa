@@ -26,11 +26,11 @@ class House():
         # Generates the costs per house
         self.distance = min_distance
         if self.type =='MAISON':
-            self.cost = 610000 * (1 + (0.06 * (self.distance-6))
+            self.cost = 610000 * (1 + (0.06 * (self.distance-6)))
         if self.type =='EENGEZINSWONING':
-            self.cost = 285000 * (1 + (0.03 * (self.distance-2))
+            self.cost = 285000 * (1 + (0.03 * (self.distance-2)))
         if self.type =='BUNGALOW':
-            self.cost = 399000 * (1 + (0.04 * (self.distance-3))
+            self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
 
 class Water():
     def __init__(self, type, uid, bottom_left, top_right):
