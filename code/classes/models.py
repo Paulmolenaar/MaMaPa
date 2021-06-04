@@ -32,6 +32,7 @@ class House():
         if self.type =='BUNGALOW':
             self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
 
+
 class Water():
     def __init__(self, type, uid, bottom_left, top_right):
         self.type = type
@@ -54,7 +55,7 @@ class Water():
 
 
 class Map():
-    def __init__(self, source_file):
+    def __init__(self, source_file, number_of_houses):
         self.all_houses = {}
         self.all_waters = self.load_water(source_file)
 
@@ -68,3 +69,12 @@ class Map():
                 line = line + 1
 
         return waters
+    
+    # def make_houses(self, number_of_houses):
+    #     houses = {}
+    #     amount_maisons = 0.15 * number_of_houses
+    #     amount_bungalows = 0.25 * number_of_houses
+    #     amount_eengezinswoning = 0.60 * number_of_houses
+
+            
+    #     return houses

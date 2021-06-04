@@ -4,10 +4,9 @@ from code.visualisation.visualize import visualisation
 
 if __name__ == "__main__":
 
-    test_kaart = Map('docs/wijk_1.csv')
-    row_list = []
     amount_of_houses = 20
-
+    test_kaart = Map('docs/wijk_1.csv', amount_of_houses)
+    row_list = []
 
 
     for i in test_kaart.all_waters:
