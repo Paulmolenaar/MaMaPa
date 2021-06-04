@@ -1,7 +1,7 @@
 import csv
 
 class House():
-    def __init__(self, type, uid, length , width , bottom_left):
+    def __init__(self, type, uid, length , width , bottom_left, min_distance):
         self.type = type
         self.id = uid
         self.value = 0
@@ -12,15 +12,26 @@ class House():
         self.top_left = 0
         self.top_right = 0
         self.neighbours = {}
+        self.cost = 0
+        self.distance = min_distance
 
     def coordinates(self, bottom_left):
-        # generates the remaining coordinates 
-        self.bottom_left = bottom_left 
+        # generates the remaining coordinates
+        self.bottom_left = bottom_left
         self.bottom_right = ((bottom_left[0] + self.width), bottom_left[1])
         self.top_left = (bottom_left[0], (bottom_left[1] + self.length))
         self.top_right = ((bottom_left[0] + self.width), (bottom_left[1] + self.length))
 
-class water():
+    def cost_function(self, distance):
+        # Generates the costs per house
+        if self.type =='MAISON':
+            self.cost = 610000 + 0.06 * (self.distance-3)
+        if self.type =='EENGEZINSWONING':
+            self.cost = 285000 + 0.03 * (self.distance-3)
+        if self.type =='BUNGALOW':
+            self.cost = 399000 + 0.04 * (self.distance-3)
+
+class Water():
     def __init__(self, type, uid, bottom_left, top_right):
         self.type = type
         self.id = uid
