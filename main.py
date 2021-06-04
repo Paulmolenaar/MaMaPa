@@ -1,4 +1,4 @@
-from  code.classes.models import House, water, Map
+from  code.classes.models import House, Water, Map
 import csv
 from code.visualisation.visualize import visualisation
 

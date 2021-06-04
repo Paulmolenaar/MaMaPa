@@ -64,7 +64,7 @@ class Map():
             reader = csv.DictReader(in_file)
             line = 0
             for row in reader:
-                waters[line] = water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
+                waters[line] = Water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
                 line = line + 1
 
         return waters
