@@ -31,11 +31,13 @@ class water():
 
     def corners(self):
         x = self.bottom_left.split(",")
-        #0,0
+        #50,44
         y = self.top_right.split(",")
-        #180,32
-        self.bottom_right = f"{int(x[0]) + int(y[0])},{int(x[1])}"
-        self.top_left = f"{int(x[0])},{int(x[1]) + int(y[1])}"
+        #130,116
+        width = int(y[0]) - int(x[0])
+        height = int(y[1]) - int(x[1])
+        self.bottom_right = f"{int(x[0]) + width},{int(x[1])}"
+        self.top_left = f"{int(x[0])},{int(x[1]) + height}"
         return 1
 
 
