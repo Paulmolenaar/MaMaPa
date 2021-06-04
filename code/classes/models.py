@@ -13,7 +13,7 @@ class House():
         self.top_right = 0
         self.neighbours = {}
         self.cost = 0
-        self.distance = min_distance
+        self.distance = 0
 
     def coordinates(self, bottom_left):
         # generates the remaining coordinates
@@ -22,8 +22,9 @@ class House():
         self.top_left = (bottom_left[0], (bottom_left[1] + self.length))
         self.top_right = ((bottom_left[0] + self.width), (bottom_left[1] + self.length))
 
-    def cost_function(self, distance):
+    def cost_function(self, min_distance):
         # Generates the costs per house
+        self.distance = min_distance
         if self.type =='MAISON':
             self.cost = 610000 + 0.06 * (self.distance-3)
         if self.type =='EENGEZINSWONING':
