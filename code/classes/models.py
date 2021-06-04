@@ -29,17 +29,6 @@ class water():
         self.top_left = 0
         self.top_right = top_right
 
-    def load_water(source_file):
-            waters = {}
-            with open(source_file, 'r') as in_file:
-                reader = csv.DictReader(in_file)
-                line = 0
-                for row in reader:
-                    waters[line] = water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
-                    line = line + 1
-
-            return waters
-
     def corners(self):
         x = self.bottom_left.split(",")
         #0,0
@@ -50,3 +39,18 @@ class water():
         return 1
 
 
+class Map():
+    def __init__(self, source_file):
+        self.all_houses = {}
+        self.all_waters = self.load_water(source_file)
+
+    def load_water(self, source_file):
+        waters = {}
+        with open(source_file, 'r') as in_file:
+            reader = csv.DictReader(in_file)
+            line = 0
+            for row in reader:
+                waters[line] = water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
+                line = line + 1
+
+        return waters
