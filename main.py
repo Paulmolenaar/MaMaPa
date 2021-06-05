@@ -13,6 +13,10 @@ if __name__ == "__main__":
         test_kaart.all_waters[i].corners()
         water = test_kaart.all_waters[i]
         row_list.append([f"{water.type}_{water.id}", water.bottom_left, water.bottom_right, water.top_right, water.top_left ,water.type.upper()])
+    
+    for j in test_kaart.all_houses:
+        house = test_kaart.all_houses[j]
+        print(house.bottom_left)
 
     ## Creating 3 houses "40,121", "32,121", "32,129", "40,129"
     row_list.append(["eengezinswoning_1", "32,121", "40,121", "40,129", "32,129", "EENGEZINSWONING"])
