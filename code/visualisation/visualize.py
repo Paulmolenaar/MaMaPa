@@ -13,7 +13,7 @@ def visualisation(output):
             datapoints.append(row)
 
     fig, ax = plt.subplots()
-    
+
 
     for row in datapoints[1:len(datapoints)-1]:
         bottom_left = row[1].split(',')
@@ -26,16 +26,16 @@ def visualisation(output):
             house_color = 'blue'
         elif type_house == 'EENGEZINSWONING':
             house_color = 'grey'
-        elif type_house == 'BUNGALOW':
+        elif type_house == 'BUNGALOWS':
             house_color = 'yellow'
-        elif type_house == 'MAISON':
+        elif type_house == 'MAISONS':
             house_color = 'brown'
         ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[0]) - int(bottom_left[0]),
                 int(top_left[1]) - int(bottom_left[1]), facecolor = house_color, label = type_house))
-                
+
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.7, box.height])
-    plt.title('Amstelhaege', fontsize=20) 
+    plt.title('Amstelhaege', fontsize=20)
     plt.legend(bbox_to_anchor=(1, 0.5), loc="center left")
     plt.xlim(0, WIDTH_MAX)
     plt.ylim(0, HEIGHT_MAX)

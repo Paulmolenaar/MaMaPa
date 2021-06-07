@@ -15,13 +15,15 @@ class House():
         self.neighbours = {}
         self.cost = 0
         self.distance = 0
+        self.coordinates = self.coordinates(bottom_left)
 
     def coordinates(self, bottom_left):
         # generates the remaining coordinates
         self.bottom_left = bottom_left
-        self.bottom_right = ((bottom_left[0] + self.width), bottom_left[1])
-        self.top_left = (bottom_left[0], (bottom_left[1] + self.length))
-        self.top_right = ((bottom_left[0] + self.width), (bottom_left[1] + self.length))
+        x = self.bottom_left.split(",")
+        self.bottom_right = str(int(x[0]) + int(self.width)) + ',' + x[1]
+        self.top_left = x[0] + ',' + str(int(x[1]) + self.length)
+        self.top_right = str(int(x[0]) + self.width) + ',' + str(int(x[1]) + self.length)
 
     def cost_function(self, min_distance):
         # Generates the costs per house
@@ -70,7 +72,7 @@ class Map():
                 line = line + 1
 
         return waters
-    
+
     def make_houses(self, number_of_houses):
          houses = {}
          width_dict =	{"maisons": 12,"bungalows": 11,"eengezinswoning": 8}
@@ -99,7 +101,7 @@ class Map():
                  id_house = amount_maisons
                  amount_maisons = amount_maisons -1
              x_bottomleft = random.randint(0,(180 - width))
-             y_bottomleft = random.randint(0,(160-height))
-             houses[teller] = House(x, id_house, height, width, [x_bottomleft,y_bottomleft], 0)
+             y_bottomleft = random.randint(0,(160 - height))
+             houses[teller] = House(x, id_house, height, width, str(x_bottomleft) + ',' + str(y_bottomleft), 0)
              teller = teller + 1
          return houses
