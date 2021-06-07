@@ -28,12 +28,15 @@ class House():
     def cost_function(self, min_distance):
         # Generates the costs per house
         self.distance = min_distance
-        if self.type =='MAISON':
+        if self.type =='maisons':
             self.cost = 610000 * (1 + (0.06 * (self.distance-6)))
-        if self.type =='EENGEZINSWONING':
+            return self.cost
+        if self.type =='eengezinswoning':
             self.cost = 285000 * (1 + (0.03 * (self.distance-2)))
-        if self.type =='BUNGALOW':
+            return self.cost
+        if self.type =='bungalows':
             self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
+            return self.cost
 
     def intersect(self, other, water):
         bottom_left = self.bottom_left.split(",")
@@ -135,6 +138,6 @@ class Map():
                     for i in range(0, teller):
                         valid = houses[teller].intersect(houses[i], False)
                         if valid == True:
-                            break 
+                            break
              teller = teller + 1
          return houses
