@@ -43,12 +43,12 @@ class House():
         min_distance = self.min_distance
         if water:
             min_distance = 0
-        test1 = int(bottom_left[0]) - min_distance >= int(other_top_right[0])
-        test2 = int(other_bottom_left[0]) >= int(top_right[0])+ min_distance
+        test1 = (int(bottom_left[0]) - min_distance) >= int(other_top_right[0])
+        test2 = int(other_bottom_left[0]) >= (int(top_right[0]) + min_distance)
         if ( test1 or test2):
             return False
-        test1 = int(bottom_left[1]) - min_distance >= int(other_top_right[1])
-        test2 = int(other_bottom_left[1]) >= int(top_right[1]) + min_distance
+        test1 = (int(bottom_left[1]) - min_distance) >= int(other_top_right[1])
+        test2 = int(other_bottom_left[1]) >= (int(top_right[1]) + min_distance)
         if(test1 or test2):
             return False
         return True
