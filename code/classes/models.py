@@ -6,6 +6,7 @@ class House():
         self.type = type
         self.id = uid
         self.value = 0
+        self.min_distance = min_distance
         self.length = length
         self.width = width
         self.bottom_left = bottom_left
@@ -14,7 +15,6 @@ class House():
         self.top_right = 0
         self.neighbours = {}
         self.cost = 0
-        self.distance = 0
         self.coordinates = self.coordinates(bottom_left)
 
     def coordinates(self, bottom_left):
@@ -34,6 +34,24 @@ class House():
             self.cost = 285000 * (1 + (0.03 * (self.distance-2)))
         if self.type =='BUNGALOW':
             self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
+
+    def intersect(self, other, water):
+        bottom_left = self.bottom_left.split(",")
+        top_right = self.top_right.split(",")
+        other_bottom_left = other.bottom_left.split(",")
+        other_top_right = other.top_right.split(",")
+        min_distance = self.min_distance
+        if water:
+            min_distance = 0
+        test1 = int(bottom_left[0]) - min_distance >= int(other_top_right[0])
+        test2 = int(other_bottom_left[0]) >= int(top_right[0])+ min_distance
+        if ( test1 or test2):
+            return False
+        test1 = int(bottom_left[1]) - min_distance >= int(other_top_right[1])
+        test2 = int(other_bottom_left[1]) >= int(top_right[1]) + min_distance
+        if(test1 or test2):
+            return False
+        return True
 
 
 class Water():
@@ -59,8 +77,8 @@ class Water():
 
 class Map():
     def __init__(self, source_file, number_of_houses):
-        self.all_houses = self.make_houses(number_of_houses)
         self.all_waters = self.load_water(source_file)
+        self.all_houses = self.make_houses(number_of_houses)
 
     def load_water(self, source_file):
         waters = {}
@@ -77,6 +95,7 @@ class Map():
          houses = {}
          width_dict =	{"maisons": 12,"bungalows": 11,"eengezinswoning": 8}
          height_dict =	{"maisons": 10,"bungalows": 7,"eengezinswoning": 8}
+         min_distance_dict = {"maisons": 6,"bungalows": 3,"eengezinswoning": 2}
          amount_maisons = int(0.15 * number_of_houses)
          amount_bungalows = int(0.25 * number_of_houses)
          amount_eengezinswoning = int(0.60 * number_of_houses)
@@ -91,6 +110,7 @@ class Map():
          for x in types_of_houses:
              height = height_dict.get(x)
              width = width_dict.get(x)
+             min_distance = min_distance_dict.get(x)
              if x == 'eengezinswoning':
                  id_house = amount_eengezinswoning
                  amount_eengezinswoning = amount_eengezinswoning -1
@@ -100,8 +120,20 @@ class Map():
              if x == 'maisons':
                  id_house = amount_maisons
                  amount_maisons = amount_maisons -1
-             x_bottomleft = random.randint(0,(180 - width))
-             y_bottomleft = random.randint(0,(160 - height))
-             houses[teller] = House(x, id_house, height, width, str(x_bottomleft) + ',' + str(y_bottomleft), 0)
+             valid = True
+             while valid == True:
+                x_bottomleft = random.randint(0,(180 - width))
+                y_bottomleft = random.randint(0,(160 - height))
+                houses[teller] = House(x, id_house, height, width, str(x_bottomleft) + ',' + str(y_bottomleft), min_distance)
+                for j in range(0, len(self.all_waters)):
+                    water = self.all_waters[j]
+                    valid = houses[teller].intersect(water, True)
+                    if valid == True:
+                        break
+                if valid == False:
+                    for i in range(0, teller):
+                        valid = houses[teller].intersect(houses[i], False)
+                        if valid == True:
+                            break 
              teller = teller + 1
          return houses
