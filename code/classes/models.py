@@ -83,6 +83,7 @@ class Map():
     def __init__(self, source_file, number_of_houses):
         self.all_waters = self.load_water(source_file)
         self.all_houses = self.make_houses(number_of_houses)
+        self.total_costs = self.total_cost()
 
     def load_water(self, source_file):
         waters = {}
@@ -141,3 +142,33 @@ class Map():
                             break
              teller = teller + 1
          return houses
+
+    def total_cost(self):
+        total_cost = 0
+        for house in self.all_houses.items():
+            house = house[1]
+            orig_length = house.length
+            orig_width = house.width
+            min_count = 180
+            for other_house in self.all_houses.items():
+                temp_house = House(house.type, house.id, orig_length, orig_width,
+                                house.bottom_left, house.min_distance)
+                other_house = other_house[1]
+                count = 0
+                while temp_house.intersect(other_house, True) == False:
+                    x = house.bottom_left.split(',')
+                    count = count + 1
+                    length = temp_house.length + 2
+                    width = temp_house.width + 2
+                    x[0] = int(x[0]) - count
+                    x[1] = int(x[1]) - count
+                    if x[0] < 0 or x[1] < 0 or x[1] + length > 160 or x[0] + width > 180:
+                        break
+                    temp_house = House(house.type, house.id, length, width,
+                                    str(x[0]) + ',' + str(x[1]), house.min_distance)
+
+                if  0 < count and count < min_count:
+                    min_count = count
+
+            total_cost = total_cost + house.cost_function(min_count - 1)
+        return total_cost
