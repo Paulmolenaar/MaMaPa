@@ -28,13 +28,13 @@ class House():
     def cost_function(self, min_distance):
         # Generates the costs per house
         self.distance = min_distance
-        if self.type =='maisons':
+        if self.type =='maison':
             self.cost = 610000 * (1 + (0.06 * (self.distance-6)))
             return self.cost
         if self.type =='eengezinswoning':
             self.cost = 285000 * (1 + (0.03 * (self.distance-2)))
             return self.cost
-        if self.type =='bungalows':
+        if self.type =='bungalow':
             self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
             return self.cost
 
@@ -98,17 +98,17 @@ class Map():
 
     def make_houses(self, number_of_houses):
          houses = {}
-         width_dict =	{"maisons": 12,"bungalows": 11,"eengezinswoning": 8}
-         height_dict =	{"maisons": 10,"bungalows": 7,"eengezinswoning": 8}
-         min_distance_dict = {"maisons": 6,"bungalows": 3,"eengezinswoning": 2}
+         width_dict =	{"maison": 12,"bungalow": 11,"eengezinswoning": 8}
+         height_dict =	{"maison": 10,"bungalow": 7,"eengezinswoning": 8}
+         min_distance_dict = {"maison": 6,"bungalow": 3,"eengezinswoning": 2}
          amount_maisons = int(0.15 * number_of_houses)
          amount_bungalows = int(0.25 * number_of_houses)
          amount_eengezinswoning = int(0.60 * number_of_houses)
          types_of_houses = []
          for i in range(amount_maisons):
-             types_of_houses.append("maisons")
+             types_of_houses.append("maison")
          for j in range(amount_bungalows):
-             types_of_houses.append("bungalows")
+             types_of_houses.append("bungalow")
          for k in range(amount_eengezinswoning):
              types_of_houses.append("eengezinswoning")
          teller = 0
@@ -119,10 +119,10 @@ class Map():
              if x == 'eengezinswoning':
                  id_house = amount_eengezinswoning
                  amount_eengezinswoning = amount_eengezinswoning -1
-             if x == 'bungalows':
+             if x == 'bungalow':
                  id_house = amount_bungalows
                  amount_bungalows = amount_bungalows -1
-             if x == 'maisons':
+             if x == 'maison':
                  id_house = amount_maisons
                  amount_maisons = amount_maisons -1
              valid = True
@@ -162,8 +162,6 @@ class Map():
                     width = temp_house.width + 2
                     x[0] = int(x[0]) - count
                     x[1] = int(x[1]) - count
-                    if x[0] < 0 or x[1] < 0 or x[1] + length > 160 or x[0] + width > 180:
-                        break
                     temp_house = House(house.type, house.id, length, width,
                                     str(x[0]) + ',' + str(x[1]), house.min_distance)
 

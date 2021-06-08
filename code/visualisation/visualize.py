@@ -26,9 +26,9 @@ def visualisation(output):
             house_color = 'blue'
         elif type_house == 'EENGEZINSWONING':
             house_color = 'grey'
-        elif type_house == 'BUNGALOWS':
+        elif type_house == 'BUNGALOW':
             house_color = 'yellow'
-        elif type_house == 'MAISONS':
+        elif type_house == 'MAISON':
             house_color = 'brown'
         ax.add_patch(Rectangle((int(bottom_left[0]), int(bottom_left[1])), int(bottom_right[0]) - int(bottom_left[0]),
                 int(top_left[1]) - int(bottom_left[1]), facecolor = house_color, label = type_house))
