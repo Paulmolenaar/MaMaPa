@@ -1,6 +1,9 @@
 import csv
 import random
 
+WIDTH_MAX  = 80
+HEIGHT_MAX = 80
+
 class House():
     def __init__(self, type, uid, length , width , bottom_left, min_distance):
         self.type = type
@@ -27,15 +30,15 @@ class House():
 
     def cost_function(self, min_distance):
         # Generates the costs per house
-        self.distance = min_distance
+        self.min_distance = min_distance
         if self.type =='maison':
-            self.cost = 610000 * (1 + (0.06 * (self.distance-6)))
+            self.cost = 610000 * (1 + (0.06 * (self.min_distance-6)))
             return self.cost
         if self.type =='eengezinswoning':
-            self.cost = 285000 * (1 + (0.03 * (self.distance-2)))
+            self.cost = 285000 * (1 + (0.03 * (self.min_distance-2)))
             return self.cost
         if self.type =='bungalow':
-            self.cost = 399000 * (1 + (0.04 * (self.distance-3)))
+            self.cost = 399000 * (1 + (0.04 * (self.min_distance-3)))
             return self.cost
 
     def intersect(self, other, water):
@@ -43,18 +46,23 @@ class House():
         top_right = self.top_right.split(",")
         other_bottom_left = other.bottom_left.split(",")
         other_top_right = other.top_right.split(",")
+        
         if water:
             min_distance = 0
         else:
             min_distance = max(self.min_distance, other.min_distance)
+
         test1 = (int(bottom_left[0]) - min_distance) >= int(other_top_right[0])
         test2 = int(other_bottom_left[0]) >= (int(top_right[0]) + min_distance)
         if ( test1 or test2):
             return False
+        
         test1 = (int(bottom_left[1]) - min_distance) >= int(other_top_right[1])
         test2 = int(other_bottom_left[1]) >= (int(top_right[1]) + min_distance)
         if(test1 or test2):
             return False
+        
+        
         return True
 
 
@@ -127,8 +135,8 @@ class Map():
                  amount_maisons = amount_maisons -1
              valid = True
              while valid == True:
-                x_bottomleft = random.randint(0,(180 - width))
-                y_bottomleft = random.randint(0,(160 - height))
+                x_bottomleft = random.randint(0,(WIDTH_MAX - width))
+                y_bottomleft = random.randint(0,(HEIGHT_MAX - height))
                 houses[teller] = House(x, id_house, height, width, str(x_bottomleft) + ',' + str(y_bottomleft), min_distance)
                 for j in range(0, len(self.all_waters)):
                     water = self.all_waters[j]
@@ -145,28 +153,43 @@ class Map():
 
     def total_cost(self):
         total_cost = 0
+        DEBUG_housenr = 0
         for house in self.all_houses.items():
             house = house[1]
+            
             orig_length = house.length
-            orig_width = house.width
-            min_count = 180
+            orig_width  = house.width
+            min_count   = WIDTH_MAX
+
             for other_house in self.all_houses.items():
-                temp_house = House(house.type, house.id, orig_length, orig_width,
+                if other_house == house:
+                    continue
+
+                temp_house  = House(house.type, house.id, orig_length, orig_width,
                                 house.bottom_left, house.min_distance)
+
                 other_house = other_house[1]
                 count = 0
                 while temp_house.intersect(other_house, True) == False:
-                    x = house.bottom_left.split(',')
-                    count = count + 1
+                    x      = house.bottom_left.split(',')
+
+                    count  = count + 1
                     length = temp_house.length + 2
-                    width = temp_house.width + 2
+                    width  = temp_house.width + 2
+
                     x[0] = int(x[0]) - count
                     x[1] = int(x[1]) - count
+                    
                     temp_house = House(house.type, house.id, length, width,
                                     str(x[0]) + ',' + str(x[1]), house.min_distance)
 
+                    # check if left bottom coords hit left/bottom side of map, check if right top coords hit right/top side of map
+                    if (x[0] <= 0 or x[1] <= 0) or (x[0] + temp_house.width >= WIDTH_MAX or x[1] + temp_house.length >= HEIGHT_MAX):
+                        break
+
                 if  0 < count and count < min_count:
                     min_count = count
-
+            DEBUG_housenr = DEBUG_housenr + 1
+            print ("("+str(DEBUG_housenr)+")"+str(house.type) + ": " + str(house.min_distance)+"\n")
             total_cost = total_cost + house.cost_function(min_count - 1)
         return total_cost
