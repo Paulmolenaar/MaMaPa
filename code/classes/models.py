@@ -29,17 +29,16 @@ class House():
         self.top_right = [bottom_left[0] + self.width, bottom_left[1] + self.length]
 
 
-    def cost_function(self, min_distance):
+    def cost_function(self, vrije_meters):
         # Generates the costs per house
-        self.min_distance = min_distance
         if self.type =='maison':
-            self.cost = 610000 * (1 + (0.06 * (self.min_distance-6)))
+            self.cost = 610000 * (1 + (0.06 * (vrije_meters-6)))
             return self.cost
         if self.type =='eengezinswoning':
-            self.cost = 285000 * (1 + (0.03 * (self.min_distance-2)))
+            self.cost = 285000 * (1 + (0.03 * (vrije_meters-2)))
             return self.cost
         if self.type =='bungalow':
-            self.cost = 399000 * (1 + (0.04 * (self.min_distance-3)))
+            self.cost = 399000 * (1 + (0.04 * (vrije_meters-3)))
             return self.cost
 
     def intersect(self, other, water):
@@ -157,9 +156,9 @@ class Map():
             distance = 0
             house = house[1]
             for other_house in self.all_houses.items():
+                other_house = other_house[1]
                 if other_house == house:
                     continue
-                other_house = other_house[1]
                 rechts = house.bottom_left[0] > other_house.top_right[0]
                 links = house.top_right[0] < other_house.bottom_left[0]
                 boven = house.bottom_left[1] > other_house.top_right[1]
@@ -187,5 +186,7 @@ class Map():
                     distance = round(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
                 if distance < min_distance:
                     min_distance = distance
-            total_cost = total_cost + house.cost_function(min_distance)
+            a = house.cost_function(min_distance)
+            print(a)
+            total_cost = total_cost + a
         return total_cost
