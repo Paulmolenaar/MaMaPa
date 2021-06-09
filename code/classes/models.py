@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-
+random.seed(10)
 class House():
     def __init__(self, type, uid, length , width , bottom_left, min_distance):
         self.type = type
@@ -130,8 +130,8 @@ class Map():
                  amount_maisons = amount_maisons -1
              valid = True
              while valid == True:
-                x_bottomleft = random.randint(0,(WIDTH_MAX - width))
-                y_bottomleft = random.randint(0,(HEIGHT_MAX - height))
+                x_bottomleft = random.randint(0 + min_distance,(WIDTH_MAX - width - min_distance))
+                y_bottomleft = random.randint(0 + min_distance,(HEIGHT_MAX - height - min_distance))
                 # x_bottomleft = 1+(18 * teller)
                 # y_bottomleft = 40 +(16*teller)
                 houses[teller] = House(x, id_house, height, width, [x_bottomleft,y_bottomleft], min_distance)
@@ -172,21 +172,22 @@ class Map():
                 if onder: 
                     distance = other_house.bottom_left[1] - house.top_right[1]
                 if links and boven:
-                    distance = round(math.sqrt(((house.top_right[0] - other_house.bottom_left[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
+                    distance = math.floor(math.sqrt(((house.top_right[0] - other_house.bottom_left[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
                 if rechts and boven:
-                    distance = round(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
+                    distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
                 if links and onder:
                     a = other_house.bottom_left[0] - house.top_right[0]
                     b = house.top_right[1] - other_house.bottom_left[1] 
                     a = a ** 2
                     b = b ** 2
                     distance = math.sqrt(a + b)
-                    distance = round(distance)
+                    distance = math.floor(distance)
                 if rechts and onder:
-                    distance = round(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
+                    distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
                 if distance < min_distance:
                     min_distance = distance
             a = house.cost_function(min_distance)
             print(a)
+            print(min_distance)
             total_cost = total_cost + a
-        return total_cost
+        return round(total_cost)
