@@ -186,4 +186,5 @@ class Map():
                     distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
                 if distance < min_distance:
                     min_distance = distance
+            total_cost = total_cost + house.cost_function(min_distance)
         return round(total_cost)
