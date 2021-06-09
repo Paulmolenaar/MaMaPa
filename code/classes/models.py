@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-random.seed(10)
+
 class House():
     def __init__(self, type, uid, length , width , bottom_left, min_distance):
         self.type = type
@@ -186,8 +186,4 @@ class Map():
                     distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
                 if distance < min_distance:
                     min_distance = distance
-            a = house.cost_function(min_distance)
-            print(a)
-            print(min_distance)
-            total_cost = total_cost + a
         return round(total_cost)
