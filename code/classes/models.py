@@ -1,8 +1,9 @@
 import csv
 import random
+import math
 
-WIDTH_MAX  = 80
-HEIGHT_MAX = 80
+WIDTH_MAX  = 180
+HEIGHT_MAX = 160
 
 class House():
     def __init__(self, type, uid, length , width , bottom_left, min_distance):
@@ -23,10 +24,10 @@ class House():
     def coordinates(self, bottom_left):
         # generates the remaining coordinates
         self.bottom_left = bottom_left
-        x = self.bottom_left.split(",")
-        self.bottom_right = str(int(x[0]) + int(self.width)) + ',' + x[1]
-        self.top_left = x[0] + ',' + str(int(x[1]) + self.length)
-        self.top_right = str(int(x[0]) + self.width) + ',' + str(int(x[1]) + self.length)
+        self.bottom_right = [bottom_left[0] + self.width, bottom_left[1]]
+        self.top_left = [bottom_left[0] , bottom_left[1] + self.length]
+        self.top_right = [bottom_left[0] + self.width, bottom_left[1] + self.length]
+
 
     def cost_function(self, min_distance):
         # Generates the costs per house
@@ -42,23 +43,17 @@ class House():
             return self.cost
 
     def intersect(self, other, water):
-        bottom_left = self.bottom_left.split(",")
-        top_right = self.top_right.split(",")
-        other_bottom_left = other.bottom_left.split(",")
-        other_top_right = other.top_right.split(",")
-        
         if water:
             min_distance = 0
         else:
             min_distance = max(self.min_distance, other.min_distance)
-
-        test1 = (int(bottom_left[0]) - min_distance) >= int(other_top_right[0])
-        test2 = int(other_bottom_left[0]) >= (int(top_right[0]) + min_distance)
+        test1 = self.bottom_left[0] - min_distance >= other.top_right[0]
+        test2 = other.bottom_left[0] >= self.top_right[0] + min_distance
         if ( test1 or test2):
             return False
         
-        test1 = (int(bottom_left[1]) - min_distance) >= int(other_top_right[1])
-        test2 = int(other_bottom_left[1]) >= (int(top_right[1]) + min_distance)
+        test1 = self.bottom_left[1] - min_distance >= other.top_right[1]
+        test2 = other.bottom_left[1] >= self.top_right[1] + min_distance
         if(test1 or test2):
             return False
         
@@ -76,14 +71,10 @@ class Water():
         self.top_right = top_right
 
     def corners(self):
-        x = self.bottom_left.split(",")
-        #50,44
-        y = self.top_right.split(",")
-        #130,116
-        width = int(y[0]) - int(x[0])
-        height = int(y[1]) - int(x[1])
-        self.bottom_right = f"{int(x[0]) + width},{int(x[1])}"
-        self.top_left = f"{int(x[0])},{int(x[1]) + height}"
+        width = self.top_right[0]- self.bottom_left[0]
+        height = self.top_right[1] - self.bottom_left[1]
+        self.bottom_right = [self.bottom_left[0] + width,self.bottom_left[1]]
+        self.top_left = [self.bottom_left[0],self.bottom_left[1] + height]
         return 1
 
 
@@ -99,7 +90,9 @@ class Map():
             reader = csv.DictReader(in_file)
             line = 0
             for row in reader:
-                waters[line] = Water("water", line+1, row['bottom_left_xy'], row['top_right_xy'])
+                blxy = list(map(int, row['bottom_left_xy'].split(",")))
+                trxy = xy = list(map(int, row['top_right_xy'].split(",")))
+                waters[line] = Water("water", line+1, blxy, trxy)
                 line = line + 1
 
         return waters
@@ -112,6 +105,9 @@ class Map():
          amount_maisons = int(0.15 * number_of_houses)
          amount_bungalows = int(0.25 * number_of_houses)
          amount_eengezinswoning = int(0.60 * number_of_houses)
+        #  amount_maisons = 2
+        #  amount_bungalows = 0
+        #  amount_eengezinswoning = 0
          types_of_houses = []
          for i in range(amount_maisons):
              types_of_houses.append("maison")
@@ -137,7 +133,9 @@ class Map():
              while valid == True:
                 x_bottomleft = random.randint(0,(WIDTH_MAX - width))
                 y_bottomleft = random.randint(0,(HEIGHT_MAX - height))
-                houses[teller] = House(x, id_house, height, width, str(x_bottomleft) + ',' + str(y_bottomleft), min_distance)
+                # x_bottomleft = 1+(18 * teller)
+                # y_bottomleft = 40 +(16*teller)
+                houses[teller] = House(x, id_house, height, width, [x_bottomleft,y_bottomleft], min_distance)
                 for j in range(0, len(self.all_waters)):
                     water = self.all_waters[j]
                     valid = houses[teller].intersect(water, True)
@@ -155,41 +153,39 @@ class Map():
         total_cost = 0
         DEBUG_housenr = 0
         for house in self.all_houses.items():
+            min_distance = 180
+            distance = 0
             house = house[1]
-            
-            orig_length = house.length
-            orig_width  = house.width
-            min_count   = WIDTH_MAX
-
             for other_house in self.all_houses.items():
                 if other_house == house:
                     continue
-
-                temp_house  = House(house.type, house.id, orig_length, orig_width,
-                                house.bottom_left, house.min_distance)
-
                 other_house = other_house[1]
-                count = 0
-                while temp_house.intersect(other_house, True) == False:
-                    x      = house.bottom_left.split(',')
-
-                    count  = count + 1
-                    length = temp_house.length + 2
-                    width  = temp_house.width + 2
-
-                    x[0] = int(x[0]) - count
-                    x[1] = int(x[1]) - count
-                    
-                    temp_house = House(house.type, house.id, length, width,
-                                    str(x[0]) + ',' + str(x[1]), house.min_distance)
-
-                    # check if left bottom coords hit left/bottom side of map, check if right top coords hit right/top side of map
-                    if (x[0] <= 0 or x[1] <= 0) or (x[0] + temp_house.width >= WIDTH_MAX or x[1] + temp_house.length >= HEIGHT_MAX):
-                        break
-
-                if  0 < count and count < min_count:
-                    min_count = count
-            DEBUG_housenr = DEBUG_housenr + 1
-            print ("("+str(DEBUG_housenr)+")"+str(house.type) + ": " + str(house.min_distance)+"\n")
-            total_cost = total_cost + house.cost_function(min_count - 1)
+                rechts = house.bottom_left[0] > other_house.top_right[0]
+                links = house.top_right[0] < other_house.bottom_left[0]
+                boven = house.bottom_left[1] > other_house.top_right[1]
+                onder = house.top_right[1] < other_house.bottom_left[1]
+                if rechts:
+                    distance = house.bottom_left[0] - other_house.top_right[0]
+                if links:
+                    distance = other_house.bottom_left[0] - house.top_right[0]
+                if boven:
+                    distance = house.bottom_left[1] - other_house.top_right[1]
+                if onder: 
+                    distance = other_house.bottom_left[1] - house.top_right[1]
+                if links and boven:
+                    distance = round(math.sqrt(((house.top_right[0] - other_house.bottom_left[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
+                if rechts and boven:
+                    distance = round(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
+                if links and onder:
+                    a = other_house.bottom_left[0] - house.top_right[0]
+                    b = house.top_right[1] - other_house.bottom_left[1] 
+                    a = a ** 2
+                    b = b ** 2
+                    distance = math.sqrt(a + b)
+                    distance = round(distance)
+                if rechts and onder:
+                    distance = round(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) + ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
+                if distance < min_distance:
+                    min_distance = distance
+            total_cost = total_cost + house.cost_function(min_distance)
         return total_cost

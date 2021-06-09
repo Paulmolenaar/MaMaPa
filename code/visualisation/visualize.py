@@ -3,8 +3,8 @@ import csv
 from matplotlib.patches import Rectangle, Patch
 
 
-WIDTH_MAX  = 80 
-HEIGHT_MAX = 80
+WIDTH_MAX  = 180 
+HEIGHT_MAX = 160
 
 def visualisation(output):
     datapoints = []
