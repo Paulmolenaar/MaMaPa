@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-random.seed(10)
+# random.seed(10)
 class House():
     def __init__(self, type, uid, length , width , bottom_left, min_distance):
         self.type = type
