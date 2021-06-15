@@ -1,12 +1,12 @@
-from  code.classes.models import House, Water, Map
+from  code.classes.models import Map
 import csv
 from code.visualisation.visualize import visualisation
 from  code.algorithms.hillclimbing import HillClimber
 
 if __name__ == "__main__":
 
-    amount_of_houses = 20
-    test_kaart = Map('docs/wijk_1.csv', amount_of_houses)
+    amount_of_houses = 40
+    test_kaart = Map('docs/wijk_2.csv', amount_of_houses)
     row_list = []
 
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     a = int(test_kaart.total_costs)
     print(a)
     b = HillClimber(test_kaart)
-    test_kaart = b.run(100)
+    test_kaart = b.run(100, mutate_houses_number=1)
     a = b.value
     print(a)
     

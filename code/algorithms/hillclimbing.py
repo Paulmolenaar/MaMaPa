@@ -1,4 +1,4 @@
-from  ..classes.models import House
+from ..classes.models import Eengezinswoning , Bungalow, Maison
 import copy
 import random
 WIDTH_MAX  = 180
@@ -9,29 +9,29 @@ class HillClimber:
 
         self.map = copy.deepcopy(map)
         self.value = map.total_costs
+        
     def mutate_houses(self, new_map, select_houses):
         for i in select_houses:
             old_house = new_map.all_houses[i]
-            valid = True
-#            counter = 0
-            while valid == True:
-#                counter = counter + 1
-#                if counter % 100 == 0:
-#                    print(counter)
-                x_bottomleft = random.randint(0 + old_house.min_distance,(WIDTH_MAX - old_house.width - old_house.min_distance))
-                y_bottomleft = random.randint(0 + old_house.min_distance,(HEIGHT_MAX - old_house.length  - old_house.min_distance))
-                new_map.all_houses[i] = House(old_house.type, old_house.id, old_house.length , old_house.width , [x_bottomleft,y_bottomleft], old_house.min_distance)
+            intersect = True
+            while intersect == True:
+                if old_house.type == 'eengezinswoning':
+                    new_map.all_houses[i] = Eengezinswoning(old_house.id)
+                if old_house.type == 'bungalow':
+                    new_map.all_houses[i]= Bungalow(old_house.id)
+                if old_house.type == 'maison':
+                    new_map.all_houses[i]= Maison(old_house.id)
                 for j in range(0, len(new_map.all_waters)):
                     water = new_map.all_waters[j]
-                    valid = new_map.all_houses[i].intersect(water, True)
-                    if valid == True:
+                    intersect = new_map.all_houses[i].intersect(water)
+                    if intersect == True:
                         break
-                if valid == False:
+                if intersect == False:
                     for k in range(0, len(new_map.all_houses)):
                         if k == i:
                             continue
-                        valid = new_map.all_houses[i].intersect(new_map.all_houses[k], False)
-                        if valid == True:
+                        intersect = new_map.all_houses[i].intersect(new_map.all_houses[k])
+                        if intersect == True:
                             break
                         
     def mutate_map(self, new_map, number_of_houses):
@@ -41,7 +41,8 @@ class HillClimber:
         select_houses = random.sample(select_houses, number_of_houses)
         self.mutate_houses(new_map,select_houses)
 
-    def check_solution(self, new_map):
+    def check_solution(self, new_map,iteration):
+        iteration = iteration
         new_value = new_map.total_cost()
         old_value = self.value
 
@@ -62,7 +63,6 @@ class HillClimber:
             new_map = copy.deepcopy(self.map)
 
             self.mutate_map(new_map, number_of_houses=mutate_houses_number)
-
             # Accept it if it is better
-            self.check_solution(new_map)
+            self.check_solution(new_map,iteration)
         return self.map
