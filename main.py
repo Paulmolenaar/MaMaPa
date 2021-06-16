@@ -2,9 +2,14 @@ from  code.classes.models import Map
 import csv
 from code.visualisation.visualize import visualisation
 from  code.algorithms.hillclimbing import HillClimber
+# to debug total duration of optimization
+import time 
 
 if __name__ == "__main__":
 
+
+    def current_milli_time():
+        return round(time.time() * 1000)
 
     amount_of_houses = 40
     row_list = []
@@ -20,12 +25,16 @@ if __name__ == "__main__":
 
 
     # Print the solution of the first map and then run the hill climber and print that solution
+    firstTime = current_milli_time()
     first_solution = int(map.total_costs)
     print('Random solution: ', first_solution)
     hillclimb = HillClimber(map)
     map = hillclimb.run(100, mutate_houses_number=1)
     better_solution = hillclimb.value
-    print('Algoritm soluiton: ', better_solution)
+    print('Algoritm solution: ', better_solution)
+
+    timeDifference = current_milli_time() - firstTime
+    print ('Time: ', str(timeDifference)+" ms")
 
     # Add the houses to the list for the excel file
     for j in map.all_houses:

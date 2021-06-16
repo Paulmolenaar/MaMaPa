@@ -48,6 +48,10 @@ class House():
 
         return True
 
+    def random_location(self):
+        self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
+        self.coordinates = self.coordinates(self.bottom_left)
+
 class Maison(House):
 
     # This is the class for maisons and sets the initial parameters
@@ -57,10 +61,9 @@ class Maison(House):
         self.min_distance = 6
         self.length = 10
         self.width = 12
-        self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
         self.min_cost = 610000
         self.percent_increase = 0.06
-        self.coordinates = self.coordinates(self.bottom_left)
+        self.random_location()
 
 
 class Bungalow(House):
@@ -72,11 +75,10 @@ class Bungalow(House):
         self.min_distance = 3
         self.length = 7
         self.width = 11
-        self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
         self.cost = 0
         self.min_cost = 399000
         self.percent_increase = 0.04
-        self.coordinates = self.coordinates(self.bottom_left)
+        self.random_location()
 
 
 class Eengezinswoning(House):
@@ -88,11 +90,10 @@ class Eengezinswoning(House):
         self.min_distance = 2
         self.length = 8
         self.width = 8
-        self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
         self.cost = 0
         self.min_cost = 285000
         self.percent_increase = 0.03
-        self.coordinates = self.coordinates(self.bottom_left)
+        self.random_location()
 
 class Water():
 
