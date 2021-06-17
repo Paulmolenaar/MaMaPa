@@ -9,10 +9,10 @@ class House():
 
     # The house class calculates the atributes of hte houses passed on to this class
     def __init__(self):
-        pass
+        self.neighbours = []
 
     # Calulates the coordinates of the corners of the houses
-    def coordinates(self, bottom_left):
+    def to_coordinates(self, bottom_left):
         # generates the remaining coordinates
         self.bottom_right = [bottom_left[0] + self.width, bottom_left[1]]
         self.top_left = [bottom_left[0] , bottom_left[1] + self.length]
@@ -50,7 +50,38 @@ class House():
 
     def random_location(self):
         self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
-        self.coordinates = self.coordinates(self.bottom_left)
+        self.coordinates = self.to_coordinates(self.bottom_left)
+
+    def rotate(self,all_waters):
+        
+        offset = int(abs(self.width - self.length) / 2)
+
+        self.bottom_left[0] = self.bottom_left[0] + int(offset/2)
+        self.bottom_left[1] = self.bottom_left[1] - int(offset/2)
+        
+        temp_width  = self.width
+        self.width  = self.length
+        self.length = temp_width
+
+        self.coordinates = self.to_coordinates(self.bottom_left)
+
+        if (self.bottom_left[0] < 0 or self.bottom_left[0] + self.width > WIDTH_MAX):
+            return False  
+              
+        if (self.bottom_left[1] < 0 or self.bottom_left[1] + self.length > HEIGHT_MAX):
+            return False
+
+        for j in range(0, len(all_waters)):
+            water = all_waters[j]
+            if (self.intersect(water)):
+                return False
+
+        for i in range(0, len(self.neighbours)):
+            other_house = self.neighbours[i]
+            if (self.intersect(other_house)):
+                return False
+
+        return True
 
 class Maison(House):
 
@@ -74,7 +105,7 @@ class Bungalow(House):
         self.id = uid
         self.min_distance = 3
         self.length = 7
-        self.width = 11
+        self.width  = 11
         self.cost = 0
         self.min_cost = 399000
         self.percent_increase = 0.04
@@ -206,6 +237,8 @@ class Map():
             house = self.all_houses[j]
             tempdict = house.__dict__
 
+            self.all_houses[j].neighbours = []
+
             # Iterate over the the other houses and calculate the smallest distance
             for i in range(0, len(self.all_houses)):
                 other_house = self.all_houses[i]
@@ -217,6 +250,9 @@ class Map():
                 # Calculate the position and the distance of the house and use this if it is the smallest distance
                 rechts,links,boven,onder = self.determine_direction(house,other_house)
                 distance = self.determine_distance(rechts,links,boven,onder,house,other_house)
+
+                if (distance < 10):
+                    self.all_houses[j].neighbours.append(other_house)
 
                 if distance < min_distance:
                     min_distance = distance
