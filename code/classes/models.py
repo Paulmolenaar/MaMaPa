@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-random.seed(12)
+random.seed(23)
 class House():
 
     # The house class calculates the atributes of hte houses passed on to this class
@@ -235,14 +235,12 @@ class Map():
             min_distance = 180
             distance = 0
             house = self.all_houses[j]
-            tempdict = house.__dict__
 
             self.all_houses[j].neighbours = []
 
             # Iterate over the the other houses and calculate the smallest distance
             for i in range(0, len(self.all_houses)):
                 other_house = self.all_houses[i]
-                tempdict2=other_house.__dict__
 
                 if i == j:
                     continue

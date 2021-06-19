@@ -2,6 +2,7 @@ from  code.classes.models import Map
 import csv
 from code.visualisation.visualize import visualisation
 from  code.algorithms.hillclimbing import HillClimber
+from  code.algorithms.simulated_annealing import SimulatedAnnealing
 # to debug total duration of optimization
 import time
 
@@ -11,7 +12,7 @@ if __name__ == "__main__":
     def current_milli_time():
         return round(time.time() * 1000)
 
-    amount_of_houses = 40
+    amount_of_houses = 60
     row_list = []
 
     # Import the waters and add them to the map and the list for the excel file
@@ -19,7 +20,7 @@ if __name__ == "__main__":
     for i in map.all_waters:
         map.all_waters[i].corners()
         water = map.all_waters[i]
-        row_list.append([f"{water.type}_{water.id}", f"{water.bottom_left[0]}, {water.bottom_left[1]}",
+        row_list.append([f"{water.type}_{water.id}", f"{water.bottom_left[0]},{water.bottom_left[1]}",
                 f"{water.bottom_right[0]},{water.bottom_right[1]}", f"{water.top_right[0]},{water.top_right[1]}",
                 f"{water.top_left[0]},{water.top_left[1]}" ,water.type.upper()])
 
@@ -28,10 +29,18 @@ if __name__ == "__main__":
     firstTime = current_milli_time()
     first_solution = int(map.total_costs)
     print('Random solution: ', first_solution)
+
+    
     hillclimb = HillClimber(map)
-    map = hillclimb.run(100, mutate_houses_number=1)
+    map = hillclimb.run(5000, mutate_houses_number=1)
     better_solution = hillclimb.value
     print('Algoritm solution: ', better_solution)
+
+
+    # sim_al = SimulatedAnnealing(map)
+    # map = sim_al.run(5000, mutate_houses_number=1)
+    # better_solution = sim_al.value
+    # print('Algoritm solution: ', better_solution)
 
     timeDifference = current_milli_time() - firstTime
     print ('Time: ', str(timeDifference)+" ms")

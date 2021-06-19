@@ -105,45 +105,46 @@ class HillClimber:
                 self.check_solution(new_map)
 
 
-    # def iterate_rotations(self):
-    #
-    #     highest_cost = 0
-    #     for i in range(0,len(self.map.all_houses)):
-    #         cur_highest_cost   = 0
-    #         house_highest_cost = None
-    #
-    #         test_map = copy.deepcopy(self.map)
-    #         for x in range(0,len(test_map.all_houses)):
-    #
-    #             if (test_map.all_houses[x].width == test_map.all_houses[x].length):
-    #                 continue
-    #
-    #             old_house = test_map.all_houses[x]
-    #
-    #             # rotate house, check if profit gets higher
-    #             if (test_map.all_houses[x].rotate(test_map.all_waters)):
-    #                 cost = test_map.total_cost()
-    #                 if (cost < cur_highest_cost):
-    #                     test_map.all_houses[x] = old_house
-    #                 else:
-    #                     cur_highest_cost = cost
-    #                     house_highest_cost = x
-    #             else:
-    #                 test_map.all_houses[x] = old_house
-    #
-    #         if (cur_highest_cost > highest_cost):
-    #             self.map.all_houses[house_highest_cost] = test_map.all_houses[house_highest_cost]
-    #
-    #     self.map.total_cost()
+    def iterate_rotations(self):
+    
+        highest_cost = 0
+        for i in range(0,len(self.map.all_houses)):
+            cur_highest_cost   = 0
+            house_highest_cost = None
+    
+            test_map = copy.deepcopy(self.map)
+            for x in range(0,len(test_map.all_houses)):
+    
+                if (test_map.all_houses[x].width == test_map.all_houses[x].length):
+                    continue
+    
+                old_house = test_map.all_houses[x]
+    
+                # rotate house, check if profit gets higher
+                if (test_map.all_houses[x].rotate(test_map.all_waters)):
+                    cost = test_map.total_cost()
+                    if (cost < cur_highest_cost):
+                        test_map.all_houses[x] = old_house
+                    else:
+                        cur_highest_cost = cost
+                        house_highest_cost = x
+                else:
+                    test_map.all_houses[x] = old_house
+    
+            if (cur_highest_cost > highest_cost):
+                self.map.all_houses[house_highest_cost] = test_map.all_houses[house_highest_cost]
+    
+        self.map.total_cost()
 
     # Iterate over the hill climber alorithm as much as the user wants
-    def run(self, iterations, verbose=False, mutate_houses_number=5):
+    def run(self, iterations, verbose=True, mutate_houses_number=5):
         self.iterations = iterations
 
         for iteration in range(iterations):
 
-            # Nice trick to only print if variable is set to True
-            print(f'Iteration {iteration}/{iterations}, current value: {self.value}') if verbose else None
+            if iteration % 1000 == 0:
+                # Nice trick to only print if variable is set to True
+                print(f'Iteration {iteration}/{iterations}, current value: {self.value}') if verbose else None
 
             # Create a copy of the old graph to simulate the change
             new_map = copy.deepcopy(self.map)
@@ -156,11 +157,15 @@ class HillClimber:
         select_houses = []
         for i in range(0,len(new_map.all_houses)):
             select_houses.append(i)
-
-        for i in range(iterations):
+        
+        times = int(self.iterations/10)
+        for i in range(times):
+            if i % 1000 == 0:
+                print(f'i {i}/{iterations/10}, current value: {self.value}')
             select_houses = random.sample(select_houses, 4)
             self.swap_house(new_map, select_houses)
-
-        # self.iterate_rotations()
+            
+#        Does not improve score
+#        self.iterate_rotations()
 
         return self.map
