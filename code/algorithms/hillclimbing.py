@@ -59,8 +59,7 @@ class HillClimber:
         self.mutate_houses(new_map, select_houses)
 
     # Check if the new map gives a better solution
-    def check_solution(self, new_map, iteration):
-        iteration = iteration
+    def check_solution(self, new_map):
         new_value = new_map.total_cost()
         old_value = self.value
 
@@ -69,36 +68,73 @@ class HillClimber:
             self.map = new_map
             self.value = new_value
 
-    def iterate_rotations(self):
+    def swap_house(self, new_map, list_of_houses):
+        for i in range(0, 4, 2):
+            k = list_of_houses[i]
+            house = new_map.all_houses[k]
+            z = list_of_houses[i + 1]
+            other_house = new_map.all_houses[z]
+            new = house.bottom_left
+            house.bottom_left = other_house.bottom_left
+            other_house.bottom_left = new
+            house.to_coordinates(house.bottom_left)
+            other_house.to_coordinates(other_house.bottom_left)
+            new_map.all_houses[z] = other_house
+            new_map.all_houses[k] = house
 
-        highest_cost = 0
-        for i in range(0,len(self.map.all_houses)):
-            cur_highest_cost   = 0    
-            house_highest_cost = None
+            for g in range(0, len(new_map.all_waters)):
+                water = new_map.all_waters[g]
+                intersect = new_map.all_houses[z].intersect(water) or new_map.all_houses[k].intersect(water)
 
-            test_map = copy.deepcopy(self.map)
-            for x in range(0,len(test_map.all_houses)):
+                # Check if the new house intersects with water, if so, place again
+                if intersect == True:
+                    new_map = copy.deepcopy(self.map)
+                    break
 
-                if (test_map.all_houses[x].width == test_map.all_houses[x].length):
-                    continue
-                
-                old_house = test_map.all_houses[x]
+            # Check if the new house itersects with the other houses, if so, place again
+            if intersect == False:
+                for p in range(0, len(new_map.all_houses)):
+                    if p == k or p == z:
+                        continue
+                    intersect = new_map.all_houses[z].intersect(new_map.all_houses[p]) or new_map.all_houses[k].intersect(new_map.all_houses[p])
+                    if intersect == True:
+                        new_map = copy.deepcopy(self.map)
+                        break
 
-                # rotate house, check if profit gets higher                
-                if (test_map.all_houses[x].rotate(test_map.all_waters)):
-                    cost = test_map.total_cost()
-                    if (cost < cur_highest_cost):
-                        test_map.all_houses[x] = old_house
-                    else:
-                        cur_highest_cost = cost
-                        house_highest_cost = x
-                else:
-                    test_map.all_houses[x] = old_house
+            if intersect == False:
+                self.check_solution(new_map)
 
-            if (cur_highest_cost > highest_cost):
-                self.map.all_houses[house_highest_cost] = test_map.all_houses[house_highest_cost]
-        
-        self.map.total_cost()
+
+    # def iterate_rotations(self):
+    #
+    #     highest_cost = 0
+    #     for i in range(0,len(self.map.all_houses)):
+    #         cur_highest_cost   = 0
+    #         house_highest_cost = None
+    #
+    #         test_map = copy.deepcopy(self.map)
+    #         for x in range(0,len(test_map.all_houses)):
+    #
+    #             if (test_map.all_houses[x].width == test_map.all_houses[x].length):
+    #                 continue
+    #
+    #             old_house = test_map.all_houses[x]
+    #
+    #             # rotate house, check if profit gets higher
+    #             if (test_map.all_houses[x].rotate(test_map.all_waters)):
+    #                 cost = test_map.total_cost()
+    #                 if (cost < cur_highest_cost):
+    #                     test_map.all_houses[x] = old_house
+    #                 else:
+    #                     cur_highest_cost = cost
+    #                     house_highest_cost = x
+    #             else:
+    #                 test_map.all_houses[x] = old_house
+    #
+    #         if (cur_highest_cost > highest_cost):
+    #             self.map.all_houses[house_highest_cost] = test_map.all_houses[house_highest_cost]
+    #
+    #     self.map.total_cost()
 
     # Iterate over the hill climber alorithm as much as the user wants
     def run(self, iterations, verbose=False, mutate_houses_number=5):
@@ -114,8 +150,17 @@ class HillClimber:
             self.mutate_map(new_map, number_of_houses=mutate_houses_number)
 
             # Accept if the new map is better
-            self.check_solution(new_map, iteration)
+            self.check_solution(new_map)
 
-        self.iterate_rotations()
+
+        select_houses = []
+        for i in range(0,len(new_map.all_houses)):
+            select_houses.append(i)
+
+        for i in range(iterations):
+            select_houses = random.sample(select_houses, 4)
+            self.swap_house(new_map, select_houses)
+
+        # self.iterate_rotations()
 
         return self.map

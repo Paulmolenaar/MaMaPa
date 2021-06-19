@@ -3,7 +3,7 @@ import csv
 from code.visualisation.visualize import visualisation
 from  code.algorithms.hillclimbing import HillClimber
 # to debug total duration of optimization
-import time 
+import time
 
 if __name__ == "__main__":
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     first_solution = int(map.total_costs)
     print('Random solution: ', first_solution)
     hillclimb = HillClimber(map)
-    map = hillclimb.run(1000, mutate_houses_number=1)
+    map = hillclimb.run(100, mutate_houses_number=1)
     better_solution = hillclimb.value
     print('Algoritm solution: ', better_solution)
 
