@@ -258,8 +258,8 @@ class Map():
                     continue
 
                 # Calculate the position and the distance of the house and use this if it is the smallest distance
-                rechts,links,boven,onder = self.determine_direction(house,other_house)
-                distance = self.determine_distance(rechts,links,boven,onder,house,other_house)
+                right,left,above,under = self.determine_direction(house,other_house)
+                distance = self.determine_distance(right,left,above,under,house,other_house)
 
                 if (distance < 10):
                     self.all_houses[j].neighbours.append(other_house)
@@ -268,50 +268,48 @@ class Map():
                     min_distance = distance
 
             # Calculate the total costs
-            a = house.cost_function(min_distance)
-            total_cost = total_cost + a
+            cost_house = house.cost_function(min_distance)
+            total_cost = total_cost + cost_house
         return round(total_cost)
 
     # Determine in which direction two houses are from each other
     def determine_direction(self,house, other_house):
-        rechts = house.bottom_left[0] > other_house.top_right[0]
-        links = house.top_right[0] < other_house.bottom_left[0]
-        boven = house.bottom_left[1] > other_house.top_right[1]
-        onder = house.top_right[1] < other_house.bottom_left[1]
+        right = house.bottom_left[0] > other_house.top_right[0]
+        left = house.top_right[0] < other_house.bottom_left[0]
+        above = house.bottom_left[1] > other_house.top_right[1]
+        under = house.top_right[1] < other_house.bottom_left[1]
 
-        return rechts,links,boven,onder
+        return right,left,above,under
 
     # Calculate the distance between two houses
-    def determine_distance(self, rechts,links,boven,onder , house, other_house):
-
+    def determine_distance(self, right, left, above, under, house, other_house):
 
         # Based on the position of the houses, the distance is calculated by pythagoras or just the absolute distance
-        if rechts:
+        if right:
             distance = house.bottom_left[0] - other_house.top_right[0]
 
-        if links:
+        if left:
             distance = other_house.bottom_left[0] - house.top_right[0]
 
-        if boven:
+        if above:
             distance = house.bottom_left[1] - other_house.top_right[1]
 
-        if onder:
+        if under:
             distance = other_house.bottom_left[1] - house.top_right[1]
 
-        if links and boven:
+        if left and above:
             distance = math.floor(math.sqrt(((house.top_right[0] - other_house.bottom_left[0]) ** 2) +
                 ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
 
-        if rechts and boven:
+        if right and above:
             distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) +
                 ((house.bottom_left[1] - other_house.top_right[1]) ** 2)))
 
-
-        if links and onder:
+        if left and under:
             distance = math.floor(math.sqrt(((other_house.bottom_left[0] - house.top_right[0]) ** 2) +
                 ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
 
-        if rechts and onder:
+        if right and under:
             distance = math.floor(math.sqrt(((house.bottom_left[0] - other_house.top_right[0]) ** 2) +
                 ((house.top_right[1] - other_house.bottom_left[1]) ** 2)))
 
