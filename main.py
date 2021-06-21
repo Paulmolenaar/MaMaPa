@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
-    map = hillclimb.run(500, mutate_houses_number=1)
+    map = hillclimb.run(1000, mutate_houses_number=1)
     better_solution = hillclimb.value
     print('Algoritm solution: ', better_solution)
 

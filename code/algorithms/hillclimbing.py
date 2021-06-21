@@ -71,59 +71,56 @@ class HillClimber:
 
     # Swap some given houses
     def swap_house(self, new_map, list_of_houses):
-
-        # Select the first and third house and swap them with the second and fourth
         for i in range(0, 2, 2):
-
-            # Swap the coordinates of the houses
-            first_house = list_of_houses[i]
-            house = new_map.all_houses[first_house]
-            second_house = list_of_houses[i + 1]
-            other_house = new_map.all_houses[second_house]
-            storage = house.bottom_left
-            house.to_coordinates(other_house.bottom_left)
-            other_house.to_coordinates(storage)
-            new_map.all_houses[second_house] = other_house
-            new_map.all_houses[first_house] = house
-
-            # Check if the house intersect with water, if so, cancel the swap
+            k = list_of_houses[i]
+            house = new_map.all_houses[k]
+            z = list_of_houses[i + 1]
+            other_house = new_map.all_houses[z]
+            new = house.bottom_left
+            house.bottom_left = other_house.bottom_left
+            other_house.bottom_left = new
+            house.to_coordinates(house.bottom_left)
+            other_house.to_coordinates(other_house.bottom_left)
+            new_map.all_houses[z] = other_house
+            new_map.all_houses[k] = house
+            
             intersect = True
             for g in range(0, len(new_map.all_waters)):
                 water = new_map.all_waters[g]
-                intersect = new_map.all_houses[second_house].intersect(water) or new_map.all_houses[first_house].intersect(water)
-
+                intersect = new_map.all_houses[z].intersect(water)
                 if intersect == True:
                     break
-            for g in range(0, len(new_map.all_waters)):
-                water = new_map.all_waters[g]
-                intersect = new_map.all_houses[second_house].intersect(water)
-                if intersect == True:
-                    break
-
+                
             if intersect == False:
                 for g in range(0, len(new_map.all_waters)):
                     water = new_map.all_waters[g]
-                    new_map.all_houses[first_house].intersect(water)
-                    if intersect == True:
-                        break
-
-            if intersect == False:
-                for p in range(0, len(new_map.all_houses)):
-                    if p == first_house:
-                        continue
-                    intersect = new_map.all_houses[first_house].intersect(new_map.all_houses[p])
-                    if intersect == True:
-                        break
-
-            if intersect == False:
-                for p in range(0, len(new_map.all_houses)):
-                    if p == second_house:
-                        continue
-                    intersect = new_map.all_houses[second_house].intersect(new_map.all_houses[p])
+                    new_map.all_houses[k].intersect(water)
                     if intersect == True:
                         break
                     
-            # Check if the solution is better
+            if intersect == False:
+                for p in range(0, len(new_map.all_houses)):
+                    if p == z:
+                        continue
+                    intersect = new_map.all_houses[z].intersect(new_map.all_houses[p])
+                    if intersect == True:
+                        break
+                    
+            if intersect == False:
+                for p in range(0, len(new_map.all_houses)):
+                    if p == k:
+                        continue
+                intersect = new_map.all_houses[k].intersect(new_map.all_houses[p])
+                if intersect == True:
+                    break
+
+            if intersect == False:
+                for houses in [house, other_house]:
+                    intersect = houses.check_distance()
+
+                    if intersect == True:
+                        break
+
             if intersect == False:
                 self.check_solution(new_map)
 
@@ -182,11 +179,11 @@ class HillClimber:
         for i in range(0,len(new_map.all_houses)):
             select_houses.append(i)
 
-        times = int(500)
+        times = int(self.iterations)
         for i in range(times):
             new_map = copy.deepcopy(self.map)
-            if i % 1000 == 0:
-                print(f'i {i}/{iterations/10}, current value: {self.value}')
+            if i % 100 == 0:
+                print(f'i {i}/{iterations}, current value: {self.value}')
             my_houses = random.sample(select_houses, 2)
             self.swap_house(new_map, my_houses)
 
