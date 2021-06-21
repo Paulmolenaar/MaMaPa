@@ -36,7 +36,7 @@ class House():
         # Checks if a house overlaps with another house on the map
         test1 = self.bottom_left[0] - min_distance >= other.top_right[0]
         test2 = other.bottom_left[0] >= self.top_right[0] + min_distance
-        if ( test1 or test2):
+        if (test1 or test2):
             return False
 
         test1 = self.bottom_left[1] - min_distance >= other.top_right[1]
@@ -48,29 +48,33 @@ class House():
 
         return True
 
+    # Make random coordinates for a house
     def random_location(self):
         self.bottom_left = [random.randint(0 + self.min_distance,(WIDTH_MAX - self.width - self.min_distance)),random.randint(0 + self.min_distance,(HEIGHT_MAX - self.length - self.min_distance))]
         self.coordinates = self.to_coordinates(self.bottom_left)
 
+    # Make the coordinates for a house when it gets rotated
     def rotate(self,all_waters):
-        
-        offset = int(abs(self.width - self.length) / 2)
 
+        # Calculate the new bottom left corner of the houses
+        offset = int(abs(self.width - self.length) / 2)
         self.bottom_left[0] = self.bottom_left[0] + int(offset/2)
         self.bottom_left[1] = self.bottom_left[1] - int(offset/2)
-        
+
+        # Get the new coordinates of the house
         temp_width  = self.width
         self.width  = self.length
         self.length = temp_width
-
         self.coordinates = self.to_coordinates(self.bottom_left)
 
+        # CHeck if rotated house is on the map
         if (self.bottom_left[0] < 0 or self.bottom_left[0] + self.width > WIDTH_MAX):
-            return False  
-              
+            return False
+
         if (self.bottom_left[1] < 0 or self.bottom_left[1] + self.length > HEIGHT_MAX):
             return False
 
+        # Check if the rotated house intersects with water or another house
         for j in range(0, len(all_waters)):
             water = all_waters[j]
             if (self.intersect(water)):
@@ -82,6 +86,13 @@ class House():
                 return False
 
         return True
+
+    # Checks the if there is enough free space on the map
+    def check_distance(self):
+        if self.bottom_right[0] + self.min_distance > WIDTH_MAX or self.top_left[1] + self.min_distance > HEIGHT_MAX or self.bottom_left[0] - self.min_distance < 0 or self.bottom_left[1] - self.min_distance < 0:
+            return True
+        else:
+            return False
 
 class Maison(House):
 
@@ -224,6 +235,7 @@ class Map():
                             break
 
              teller = teller + 1
+
          return houses
 
     # Determine the costs of all the houses and its free space
@@ -271,6 +283,7 @@ class Map():
 
     # Calculate the distance between two houses
     def determine_distance(self, rechts,links,boven,onder , house, other_house):
+
 
         # Based on the position of the houses, the distance is calculated by pythagoras or just the absolute distance
         if rechts:

@@ -8,11 +8,11 @@ import time
 
 if __name__ == "__main__":
 
-
+    # Function that calculates the time
     def current_milli_time():
         return round(time.time() * 1000)
 
-    amount_of_houses = 60
+    amount_of_houses = 40
     row_list = []
 
     # Import the waters and add them to the map and the list for the excel file
@@ -25,23 +25,24 @@ if __name__ == "__main__":
                 f"{water.top_left[0]},{water.top_left[1]}" ,water.type.upper()])
 
 
-    # Print the solution of the first map and then run the hill climber and print that solution
+    # Print the solution of the first (random) map and then run the hill climber and print that solution
     firstTime = current_milli_time()
     first_solution = int(map.total_costs)
     print('Random solution: ', first_solution)
 
-    
+    # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
     map = hillclimb.run(5000, mutate_houses_number=1)
     better_solution = hillclimb.value
     print('Algoritm solution: ', better_solution)
 
-
+    # Run the simulated annealing and print the solution
     # sim_al = SimulatedAnnealing(map)
     # map = sim_al.run(5000, mutate_houses_number=1)
     # better_solution = sim_al.value
     # print('Algoritm solution: ', better_solution)
 
+    # Print the time the programm took
     timeDifference = current_milli_time() - firstTime
     print ('Time: ', str(timeDifference)+" ms")
 
