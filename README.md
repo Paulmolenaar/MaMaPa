@@ -64,7 +64,53 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
 - **/docs**: bevat de verschillende databestanden die nodig zijn om de plattegrond te vullen en te visualiseren
 - **/results**: bevat de output.csv file en de gevisualiseerde plattegrond file
 
-### Resultaten
+### Algoritmes uitleg
+
+## Random algoritme
+
+Dit algoritme onderneemt de volgende stappen: 
+
+- **1**: Het plaatsen van het water op de map aan de hand van de coördinaten. Deze leest hij uit de docs/docs folder.
+- **2**: Het algoritme genereert een random x,y coördinaat van de linker onder hoek (bottom_left) van een huis.
+- **3**: Aan de hand van de bottom_left coördinaat berekent het algoritme de overige coördinaten van de hoekpunten middels het optellen van de lengte en breedte van het betreffende huis.
+- **4**: Het controleert of het gegenereerde huis overlapt met een bestaand huis of water.
+- **5**: Mits dit niet gebeurt wordt het huis geplaatst, anders genereert het algoritme een nieuwe coördinaat om vervolgens terug te keren naar stap 4. 
+- **6**: Dit proces wordt herhaald tot alle 20, 40 of 60 huizen geplaatst zijn.
+
+### Resultaten Random algoritme
+
+
+
+## Hill Climber  algoritme
+
+Dit algoritme onderneemt de volgende stappen: 
+
+- **1**: Het selecteert een van de bestaande huizen
+- **2**: Het zoekt een nieuwe random locatie voor dit huis
+- **3**: Het controleert of dit een geldige locatie is
+- **4**: Het berekent de nieuwe totale opbrengsten van de plattegrond
+- **5**: Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
+- **6**: Dit proces wordt 50.000 keer herhaald. Na 50.000 iteraties stagneert de verhoging van de totale opbrengst. 
+
+### Resultaten Hill Climber
+
+## Simulated Annealing algoritme
+
+Dit algoritme onderneemt de volgende stappen: 
+
+- **1**: Het selecteert een van de bestaande huizen
+- **2**: Het zoekt een nieuwe random locatie voor dit huis
+- **3**: Het controleert of dit een geldige locatie is
+- **4**: Het berekent de nieuwe totale opbrengsten van de plattegrond
+- **5**: Het berekent het verschil tussen de oude en de nieuwe opbrengst 
+- **5a**: Mits dit verschil groter is dan 0 wordt de oude plattegrond vervangen
+- **5b**: Mits dit verschil kleiner is dan 0, wordt het verschil gedeeld door de temperatuur (deze wordt vooraf ingesteld). 
+- **5b.1**: Deze uitkomst wordt gebruikt als exponent voor de formule probability = math.exp(uitkomst). Deze genereert een kans tussen de 0 en 1.  
+- **5b.2**: Het algoritme genereert een random kansberekening tussen 0 en 1. Als deze random kansberekening groter is dan je kansberekening bij 5b.1, wordt er geen aanpassing gedaan. Als deze kleiner is, wordt het huisje op de nieuwe locatie geplaatst. In dit geval is deze locatie slechter voor de totale uitkomst. Des te langer het algoritme draait, des te kleiner de kans is dat verslechteringen worden geaccepteerd.
+- **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).    
+
+
+### Resultaten Simulated Annealing
 
 
 ## Auteurs
