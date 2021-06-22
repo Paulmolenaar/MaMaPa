@@ -81,7 +81,7 @@ Dit algoritme onderneemt de volgende stappen:
 
 Deze resultaten zijn gegenereert aan de hand van random.seed(12).
 
-<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="400" height="300"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="400" height="300"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="400" height="300">
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="200" height="150">
 
 
 ## Hill Climber  algoritme
