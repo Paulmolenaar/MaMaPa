@@ -71,7 +71,7 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
 Dit algoritme onderneemt de volgende stappen: 
 
 - **1**: Het plaatsen van het water op de map aan de hand van de coördinaten. Deze leest hij uit de docs/docs folder.
-- **2**: Het algoritme genereert een random x,y coördinaat van de linker onder hoek (bottom_left) van een huis.
+- **2**: Het algoritme genereert een random x,y coördinaat van de linker onder hoek (bottom_left) van een huis. 
 - **3**: Aan de hand van de bottom_left coördinaat berekent het algoritme de overige coördinaten van de hoekpunten middels het optellen van de lengte en breedte van het betreffende huis.
 - **4**: Het controleert of het gegenereerde huis overlapt met een bestaand huis of water.
 - **5**: Mits dit niet gebeurt wordt het huis geplaatst, anders genereert het algoritme een nieuwe coördinaat om vervolgens terug te keren naar stap 4. 
@@ -79,6 +79,11 @@ Dit algoritme onderneemt de volgende stappen:
 
 ### Resultaten Random algoritme
 
+Deze resultaten zijn gegenereert aan de hand van random.seed(12).
+
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="400" height="300">
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="400" height="300">
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="400" height="300">
 
 
 ## Hill Climber  algoritme
