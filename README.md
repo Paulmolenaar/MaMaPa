@@ -79,10 +79,11 @@ Dit algoritme onderneemt de volgende stappen:
 
 ### Resultaten Random algoritme
 
-Deze resultaten zijn gegenereert aan de hand van random.seed(12).
+Hieronder worden de visualizaties uiteengezet in respectievelijk de wijk 1, 2 en 3 volgorde. Deze resultaten kunnen gerund worden middels het weghalen van de hillclimber en simulated annealing functie in main.py.
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="200" height="150">
 
+Deze resultaten zijn gegenereert aan de hand van random.seed(12).
 
 ## Hill Climber  algoritme
 
