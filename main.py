@@ -64,4 +64,4 @@ if __name__ == "__main__":
         writer.writerow(["networth", better_solution])
 
     # Make the visualistions
-    visualisation('output.csv')
+    visualisation('./results/output.csv')

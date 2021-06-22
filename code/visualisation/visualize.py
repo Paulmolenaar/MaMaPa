@@ -48,4 +48,4 @@ def visualisation(output):
     plt.legend(bbox_to_anchor=(1, 0.5), loc="center left", handles = patch_list)
     plt.xlim(0, WIDTH_MAX)
     plt.ylim(0, HEIGHT_MAX)
-    plt.savefig('visualisation.png',)
+    plt.savefig('./results/visualisation.png',)
