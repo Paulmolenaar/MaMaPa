@@ -64,8 +64,6 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
 - **/docs**: bevat de verschillende databestanden die nodig zijn om de plattegrond te vullen en te visualiseren
 - **/results**: bevat de output.csv file en de gevisualiseerde plattegrond file
 
-### Algoritmes uitleg
-
 ## Random algoritme
 
 Dit algoritme onderneemt de volgende stappen: 
