@@ -167,7 +167,7 @@ class HillClimber:
 
             if iteration % 1000 == 0:
                 # Nice trick to only print if variable is set to True
-                print(f'Iteration {iteration}/{iterations}, current value: {self.value}') if verbose else None
+                print(f'Iteration {iteration}/{iterations}, Current value: {self.value}') if verbose else None
 
             # Create a copy of the old graph to simulate the change
             new_map = copy.deepcopy(self.map)
@@ -177,19 +177,19 @@ class HillClimber:
             self.check_solution(new_map)
 
 
-        # Select random houses and swap them
-        select_houses = []
-        for i in range(0,len(new_map.all_houses)):
-            select_houses.append(i)
+#         # Select random houses and swap them
+#         select_houses = []
+#         for i in range(0,len(new_map.all_houses)):
+#             select_houses.append(i)
 
-        times = int(self.iterations)
-        for i in range(times):
-            if i % 1000 == 0:
-                print(f'i {i}/{iterations/10}, current value: {self.value}')
-            my_houses = random.sample(select_houses, 4)
-            self.swap_house(new_map, my_houses)
+#         times = int(self.iterations)
+#         for i in range(times):
+#             if i % 1000 == 0:
+#                 print(f'i {i}/{iterations/10}, current value: {self.value}')
+#             my_houses = random.sample(select_houses, 4)
+#             self.swap_house(new_map, my_houses)
 
-#        Does not improve score
-#        self.iterate_rotations()
+# #        Does not improve score
+# #        self.iterate_rotations()
 
         return self.map

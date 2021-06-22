@@ -6,6 +6,8 @@ from  code.algorithms.simulated_annealing import SimulatedAnnealing
 # to debug total duration of optimization
 import time
 
+ITERATIONS_AMOUNT = 5000
+
 if __name__ == "__main__":
 
     # Function that calculates the time
@@ -32,13 +34,13 @@ if __name__ == "__main__":
 
     # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
-    map = hillclimb.run(5000, mutate_houses_number=1)
+    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     better_solution = hillclimb.value
     print('Algoritm solution: ', better_solution)
 
     # Run the simulated annealing and print the solution
     # sim_al = SimulatedAnnealing(map)
-    # map = sim_al.run(5000, mutate_houses_number=1)
+    # map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     # better_solution = sim_al.value
     # print('Algoritm solution: ', better_solution)
 
@@ -54,7 +56,7 @@ if __name__ == "__main__":
                 f"{house.top_left[0]},{house.top_left[1]}" ,house.type.upper()])
 
     # Make an excel file with the locations of the houses and water
-    with open('output.csv', 'w', newline='') as file:
+    with open('./results/output.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["structure", "corner_1", "corner_2","corner_3","corner_4","type"])
         for j in row_list:
