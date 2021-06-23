@@ -100,7 +100,7 @@ Hieronder worden de visualizaties uiteengezet in respectievelijk de wijk 1, 2 en
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="200" height="150">
 
-Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546).
+Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546) bovenin models.py.
 
 ## Hill Climber  algoritme
 
@@ -131,7 +131,7 @@ Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk3.png" width="200" height="150">
 
-Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546).
+Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546)  bovenin models.py.
 
 ## Simulated Annealing algoritme
 
@@ -166,7 +166,7 @@ Als je alleen het Simulated Annealing algoritme wil runnen, dien je de volgende 
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk3.png" width="200" height="150">
 
-Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546).
+Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546) bovenin models.py.
 
 ## Future work
 
