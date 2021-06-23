@@ -168,7 +168,7 @@ class HillClimber:
         for i in range(2000):
             new_map = copy.deepcopy(self.map)
             if i % 1000 == 0:
-                print(f'i {i}/{iterations}, current value: {self.value}') if verbose else None
+                print(f'i {i}/{2000}, current value: {self.value}') if verbose else None
             my_houses = random.sample(select_houses, 2)
             self.swap_house(new_map, my_houses)
 
