@@ -78,6 +78,7 @@ Dit algoritme onderneemt de volgende stappen:
 Als je alleen het random algoritme wil runnen, dien je de volgende code te commenten in main.py
 
 <details>
+    <summary> Klik hier om de code te zien </summary>
 ```
     # Run the hill climber and print that solution
     # hillclimb = HillClimber(map)
