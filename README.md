@@ -76,7 +76,6 @@ Dit algoritme onderneemt de volgende stappen:
 - **6**: Dit proces wordt herhaald tot alle 20, 40 of 60 huizen geplaatst zijn.
 
 Als je alleen het random algoritme wil runnen, dien je de volgende code te commenten in main.py
-
 <details>
     <summary> Klik hier om de code te zien </summary>
   
@@ -115,14 +114,13 @@ Dit algoritme onderneemt de volgende stappen:
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
 
 Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te commenten in main.py
-
 <details>
     <summary> Klik hier om de code te zien </summary>
 
-    # Run the simulated annealing and print the solution
-    sim_al = SimulatedAnnealing(map)
-    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    solution = sim_al.value
+    # Run the hill climber and print that solution
+    hillclimb = HillClimber(map)
+    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = hillclimb.value
     print('Algoritm solution: ', solution)
   
 </details>
@@ -149,15 +147,14 @@ Dit algoritme onderneemt de volgende stappen:
 - **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).  
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert. 
 
-Als je alleen het Simulated Annealing algoritme wil runnen, dien je de volgende code te commenten in main.py
-
+Als je alleen het Simulated Annealing algoritme wil runnen, dien je de volgende code te **de**commenten in main.py
 <details>
     <summary> Klik hier om de code te zien </summary>
-
-    # Run the hill climber and print that solution
-    hillclimb = HillClimber(map)
-    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    solution = hillclimb.value
+  
+    # Run the simulated annealing and print the solution
+    sim_al = SimulatedAnnealing(map)
+    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = sim_al.value
     print('Algoritm solution: ', solution)
   
 </details>
