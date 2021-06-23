@@ -52,6 +52,8 @@ Verder genereert het programma de volgende files in de results folder:
 - **output file**: Het programma genereert een output.csv file waarin de coördinaten van het water en de huizen uiteengezet worden. Tevens wordt de totale waarde van de plattegrond vermeld. 
 - **visualization map**: Het programma genereert een visualization.png file die de plattegrond visualiseert.
 
+De aantal huizen variant kan gewijzigd worden middels de variabele amount_of_houses, bovenin de main.py file. Je geeft hierbij 20, 40 of 60 huizen op. 
+
 
 ### Structuur
 
