@@ -92,7 +92,7 @@ Als je alleen het random algoritme wil runnen, dien je de volgende code te comme
     solution = sim_al.value
     print('Algoritm solution: ', solution)
 ```
-  </details>
+</details>
 
 ### Resultaten Random algoritme
 
