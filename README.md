@@ -113,7 +113,7 @@ Dit algoritme onderneemt de volgende stappen:
 - **7**: Hierna swapt het programma per iteratie 2 huizen. Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
 
-Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te commenten in main.py
+Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te **de**commenten in main.py
 <details>
     <summary> Klik hier om de code te zien </summary>
 
