@@ -93,6 +93,8 @@ Dit algoritme onderneemt de volgende stappen:
 - **4**: Het berekent de nieuwe totale opbrengsten van de plattegrond
 - **5**: Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
 - **6**: Dit proces wordt 50.000 keer herhaald. Na 50.000 iteraties stagneert de verhoging van de totale opbrengst. 
+- **7**: Hierna swapt het programma per iteratie 2 huizen. Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
+- **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
 
 ### Resultaten Hill Climber
 
@@ -113,7 +115,8 @@ Dit algoritme onderneemt de volgende stappen:
 - **5b**: Mits dit verschil kleiner is dan 0, wordt het verschil gedeeld door de temperatuur (deze wordt vooraf ingesteld). 
 - **5b.1**: Deze uitkomst wordt gebruikt als exponent voor de formule probability = math.exp(uitkomst). Deze genereert een kans tussen de 0 en 1.  
 - **5b.2**: Het algoritme genereert een random kansberekening tussen 0 en 1. Als deze random kansberekening groter is dan je kansberekening bij 5b.1, wordt er geen aanpassing gedaan. Als deze kleiner is, wordt het huisje op de nieuwe locatie geplaatst. In dit geval is deze locatie slechter voor de totale uitkomst. Des te langer het algoritme draait, des te kleiner de kans is dat verslechteringen worden geaccepteerd.
-- **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).    
+- **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).  
+- **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert. 
 
 
 ### Resultaten Simulated Annealing
@@ -121,6 +124,12 @@ Dit algoritme onderneemt de volgende stappen:
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk3.png" width="200" height="150">
 
 Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546).
+
+## Future work
+
+- Alle parameters zijn gebruikt voor de 40 huizen variant in combinatie met de wijk_2 variant. Future work zou kunnen zijn dit in alle variaties (20, 60 huizen, wijk_1, wijk_3) te doen. 
+- De Hill Climber en Simulated Annealing nemen als startpunt de oplossing vanuit de random algoritme. Deze oplossing is echter nog niet optimaal. Future work zou kunnen zijn deze beginoplossing kunnen optimaliseren zodat het programma minder tijd nodig heeft een betere oplossing te vinden. 
+- Het implementeren van een (sub)algoritme die de huisjes 1 meter in elke richting probeert te verplaatsen en toetst of de value hoger wordt. 
 
 ## Auteurs
 - Max Santosa 
