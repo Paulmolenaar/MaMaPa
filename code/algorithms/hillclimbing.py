@@ -142,7 +142,7 @@ class HillClimber:
             else:
                 continue
 
-    # Iterate over the hill climber alorithm as much as the user wants
+    # Iterate over the hill climber algorithm as much as the user wants
     def run(self, iterations, verbose=True, mutate_houses_number=5):
         self.iterations = iterations
 
