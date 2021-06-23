@@ -6,7 +6,7 @@ from  code.algorithms.simulated_annealing import SimulatedAnnealing
 # to debug total duration of optimization
 import time
 
-ITERATIONS_AMOUNT = 10000
+ITERATIONS_AMOUNT = 50000
 
 if __name__ == "__main__":
 
@@ -33,16 +33,16 @@ if __name__ == "__main__":
     print('Random solution: ', solution)
 
     # Run the hill climber and print that solution
-    hillclimb = HillClimber(map)
-    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    solution = hillclimb.value
-    print('Algoritm solution: ', solution)
+    # hillclimb = HillClimber(map)
+    # map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    # solution = hillclimb.value
+    # print('Algoritm solution: ', solution)
 
     # Run the simulated annealing and print the solution
-    # sim_al = SimulatedAnnealing(map)
-    # map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    # solution = sim_al.value
-    # print('Algoritm solution: ', solution)
+    sim_al = SimulatedAnnealing(map)
+    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = sim_al.value
+    print('Algoritm solution: ', solution)
 
     # Print the time the programm took
     timeDifference = current_milli_time() - firstTime

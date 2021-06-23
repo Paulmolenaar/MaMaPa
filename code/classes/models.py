@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-random.seed(11111111222222222233333333)
+random.seed(1243546)
 class House():
 
     # The house class calculates the atributes of hte houses passed on to this class

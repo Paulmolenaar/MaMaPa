@@ -44,6 +44,28 @@ class SimulatedAnnealing(HillClimber):
         # Update the temperature
         self.update_temperature()
 
+    def iterate_rotations(self):
+        for i in range(0,len(self.map.all_houses)):
+            test_map = copy.deepcopy(self.map)
+            if (test_map.all_houses[i].width == test_map.all_houses[i].length):
+                continue
+
+
+            # rotate house, check if profit gets higher
+            if (test_map.all_houses[i].rotate(test_map.all_waters)):
+                self.hill_check_solution(test_map)
+            else:
+                continue
+
+    def hill_check_solution(self, new_map):
+        new_value = new_map.total_cost()
+        old_value = self.value
+
+        # We are looking for maps that cost less, so replace the map if the costs are higher
+        if new_value >= old_value:
+            self.map = new_map
+            self.value = new_value
+
     # Run the algorithm
     def run(self, iterations, verbose=True, mutate_houses_number=5):
         self.iterations = iterations
@@ -60,4 +82,5 @@ class SimulatedAnnealing(HillClimber):
             # Accept if the new map is better
             self.check_solution(new_map)
 
+        self.iterate_rotations()
         return self.map

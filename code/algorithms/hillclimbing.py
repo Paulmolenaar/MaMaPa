@@ -165,8 +165,7 @@ class HillClimber:
         for i in range(0,len(new_map.all_houses)):
             select_houses.append(i)
 
-        times = int(self.iterations)
-        for i in range(times):
+        for i in range(2000):
             new_map = copy.deepcopy(self.map)
             if i % 1000 == 0:
                 print(f'i {i}/{iterations}, current value: {self.value}')
@@ -174,7 +173,6 @@ class HillClimber:
             self.swap_house(new_map, my_houses)
         print("swap ", self.value)
 
-       #Does not improve score
         self.iterate_rotations()
         print("rotate ", self.value)
         return self.map
