@@ -114,6 +114,19 @@ Dit algoritme onderneemt de volgende stappen:
 - **7**: Hierna swapt het programma per iteratie 2 huizen. Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
 
+Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te commenten in main.py
+
+<details>
+    <summary> Klik hier om de code te zien </summary>
+
+    # Run the simulated annealing and print the solution
+    sim_al = SimulatedAnnealing(map)
+    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = sim_al.value
+    print('Algoritm solution: ', solution)
+  
+</details>
+
 ### Resultaten Hill Climber
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk3.png" width="200" height="150">
@@ -135,6 +148,19 @@ Dit algoritme onderneemt de volgende stappen:
 - **5b.2**: Het algoritme genereert een random kansberekening tussen 0 en 1. Als deze random kansberekening groter is dan je kansberekening bij 5b.1, wordt er geen aanpassing gedaan. Als deze kleiner is, wordt het huisje op de nieuwe locatie geplaatst. In dit geval is deze locatie slechter voor de totale uitkomst. Des te langer het algoritme draait, des te kleiner de kans is dat verslechteringen worden geaccepteerd.
 - **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).  
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert. 
+
+Als je alleen het Simulated Annealing algoritme wil runnen, dien je de volgende code te commenten in main.py
+
+<details>
+    <summary> Klik hier om de code te zien </summary>
+
+    # Run the hill climber and print that solution
+    hillclimb = HillClimber(map)
+    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = hillclimb.value
+    print('Algoritm solution: ', solution)
+  
+</details>
 
 
 ### Resultaten Simulated Annealing
