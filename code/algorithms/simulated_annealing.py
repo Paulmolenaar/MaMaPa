@@ -74,7 +74,7 @@ class SimulatedAnnealing(HillClimber):
 
         for iteration in range(iterations):
             if iteration % 1000 == 0:
-                # Nice trick to only print if variable is set to True
+                # Print the iteration and value every 1000th iteration if verbose is set to True
                 print(f'Iteration {iteration}/{iterations}, current value: {self.value}') if verbose else None
 
             # Create a copy of the old map to simulate the change

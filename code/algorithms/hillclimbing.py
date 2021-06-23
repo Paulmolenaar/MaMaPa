@@ -64,7 +64,7 @@ class HillClimber:
         new_value = new_map.total_cost()
         old_value = self.value
 
-        # We are looking for maps that cost less, so replace the map if the costs are higher
+        # We are looking for maps that cost more, so replace the map if the costs are higher
         if new_value >= old_value:
             self.map = new_map
             self.value = new_value
@@ -149,10 +149,10 @@ class HillClimber:
         for iteration in range(iterations):
 
             if iteration % 1000 == 0:
-                # Nice trick to only print if variable is set to True
+                # Print the iteration and value every 1000th iteration if verbose is set to True
                 print(f'Iteration {iteration}/{iterations}, Current value: {self.value}') if verbose else None
 
-            # Create a copy of the old graph to simulate the change
+            # Create a copy of the old map to simulate the change
             new_map = copy.deepcopy(self.map)
             self.mutate_map(new_map, number_of_houses=mutate_houses_number)
 
