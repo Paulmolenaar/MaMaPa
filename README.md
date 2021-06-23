@@ -96,7 +96,7 @@ Dit algoritme onderneemt de volgende stappen:
 
 ### Resultaten Hill Climber
 
-<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk3.PNG" width="200" height="150">
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk3.png" width="200" height="150">
 
 Deze resultaten zijn gegenereert aan de hand van random.seed(1243546).
 
@@ -118,7 +118,7 @@ Dit algoritme onderneemt de volgende stappen:
 
 ### Resultaten Simulated Annealing
 
-<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk3.PNG" width="200" height="150">
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk1.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk2.png" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk3.png" width="200" height="150">
 
 Deze resultaten zijn gegenereert aan de hand van random.seed(1243546).
 
