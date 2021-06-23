@@ -60,7 +60,7 @@ De hierop volgende lijst beschrijft de belangrijkste mappen en files in het proj
 - **/code**: bevat alle code van dit project
   - **/code/algorithms**: bevat de code voor algoritmes
   - **/code/classes**: bevat de zes benodigde classes voor deze case
-  - **/code/visualisation**: bevat de bokeh code voor de visualisatie
+  - **/code/visualisation**: bevat de code voor de visualisatie
 - **/docs**: bevat de verschillende databestanden die nodig zijn om de plattegrond te vullen en te visualiseren
 - **/results**: bevat de output.csv file en de gevisualiseerde plattegrond file
 
@@ -81,7 +81,7 @@ Hieronder worden de visualizaties uiteengezet in respectievelijk de wijk 1, 2 en
 
 <img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/random_image_wijk_3.PNG" width="200" height="150">
 
-Deze resultaten zijn gegenereert aan de hand van random.seed(12).
+Deze resultaten zijn gegenereert aan de hand van random.seed(1243546).
 
 ## Hill Climber  algoritme
 
@@ -95,6 +95,10 @@ Dit algoritme onderneemt de volgende stappen:
 - **6**: Dit proces wordt 50.000 keer herhaald. Na 50.000 iteraties stagneert de verhoging van de totale opbrengst. 
 
 ### Resultaten Hill Climber
+
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Hillclimbing_40_wijk3.PNG" width="200" height="150">
+
+Deze resultaten zijn gegenereert aan de hand van random.seed(1243546).
 
 ## Simulated Annealing algoritme
 
@@ -114,6 +118,9 @@ Dit algoritme onderneemt de volgende stappen:
 
 ### Resultaten Simulated Annealing
 
+<img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk1.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk2.PNG" width="200" height="150"><img src="https://github.com/Paulmolenaar/MaMaPa/blob/main/results/images/Simulated_annealing_40_wijk3.PNG" width="200" height="150">
+
+Deze resultaten zijn gegenereert aan de hand van random.seed(1243546).
 
 ## Auteurs
 - Max Santosa 

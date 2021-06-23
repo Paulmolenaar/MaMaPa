@@ -43,7 +43,7 @@ def visualisation(output):
 
     # Add the atributes to the graph
     box = ax.get_position()
-    ax.set_position([box.x0, box.y0, box.width * 0.7, box.height * 0.7])
+    ax.set_position([box.x0, box.y0, box.width * 0.7, box.height])
     plt.title('Amstelhaege', fontsize=20)
     plt.legend(bbox_to_anchor=(1, 0.5), loc="center left", handles = patch_list)
     plt.xlim(0, WIDTH_MAX)

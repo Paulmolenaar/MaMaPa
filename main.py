@@ -18,7 +18,7 @@ if __name__ == "__main__":
     row_list = []
 
     # Import the waters and add them to the map and the list for the excel file
-    map = Map('docs/wijk_2.csv', amount_of_houses)
+    map = Map('docs/wijk_1.csv', amount_of_houses)
     for i in map.all_waters:
         map.all_waters[i].corners()
         water = map.all_waters[i]
@@ -29,20 +29,20 @@ if __name__ == "__main__":
 
     # Print the solution of the first (random) map and then run the hill climber and print that solution
     firstTime = current_milli_time()
-    first_solution = int(map.total_costs)
-    print('Random solution: ', first_solution)
+    solution = int(map.total_costs)
+    print('Random solution: ', solution)
 
     # Run the hill climber and print that solution
-    hillclimb = HillClimber(map)
-    map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    better_solution = hillclimb.value
-    print('Algoritm solution: ', better_solution)
+    # hillclimb = HillClimber(map)
+    # map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    # solution = hillclimb.value
+    # print('Algoritm solution: ', solution)
 
     # Run the simulated annealing and print the solution
-    # sim_al = SimulatedAnnealing(map)
-    # map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
-    # better_solution = sim_al.value
-    # print('Algoritm solution: ', better_solution)
+    sim_al = SimulatedAnnealing(map)
+    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = sim_al.value
+    print('Algoritm solution: ', solution)
 
     # Print the time the programm took
     timeDifference = current_milli_time() - firstTime
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         writer.writerow(["structure", "corner_1", "corner_2","corner_3","corner_4","type"])
         for j in row_list:
             writer.writerow(j)
-        writer.writerow(["networth", better_solution])
+        writer.writerow(["networth", solution])
 
     # Make the visualistions
     visualisation('./results/output.csv')
