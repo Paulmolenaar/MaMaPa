@@ -171,7 +171,7 @@ Deze resultaten zijn gegenereerd aan de hand van random.seed(1243546) bovenin mo
 ## Future work
 
 - Alle parameters zijn gebruikt voor de 40 huizen variant in combinatie met de wijk_2 variant. Future work zou kunnen zijn dit in alle variaties (20, 60 huizen, wijk_1, wijk_3) te doen. 
-- De Hill Climber en Simulated Annealing nemen als startpunt de oplossing vanuit de random algoritme. Deze oplossing is echter nog niet optimaal. Future work zou kunnen zijn deze beginoplossing kunnen optimaliseren zodat het programma minder tijd nodig heeft een betere oplossing te vinden. 
+- De Hill Climber en Simulated Annealing nemen als startpunt de oplossing vanuit de random algoritme. Deze oplossing is echter nog niet optimaal. Future work zou kunnen zijn deze beginoplossing optimaliseren zodat het programma minder tijd nodig heeft een betere oplossing te vinden. 
 - Het implementeren van een (sub)algoritme die de huisjes 1 meter in elke richting probeert te verplaatsen en toetst of de value hoger wordt. 
 
 ## Auteurs
