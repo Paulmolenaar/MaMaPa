@@ -112,14 +112,14 @@ Dit algoritme onderneemt de volgende stappen:
 - **4**: Het berekent de nieuwe totale opbrengsten van de plattegrond
 - **5**: Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
 - **6**: Dit proces wordt 50.000 keer herhaald. Na 50.000 iteraties stagneert de verhoging van de totale opbrengst. 
-- **7**: Hierna swapt het programma per iteratie 2 huizen. Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
-- **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
+- **7**: Hierna swapt het programma 2 huizen. Mits deze opbrengst hoger is wordt de oude plattegrond vervangen, zo niet wordt de oude plattegrond behouden. 
+- **8**: Dit proces wordt 2.000 keer herhaald
+- **9**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert.
 
 Als je alleen het Hill Climber algoritme wil runnen, dien je de volgende code te **de**commenten in main.py
 <details>
     <summary> Klik hier om de code te zien </summary>
 
-    # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
     map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     solution = hillclimb.value
@@ -147,13 +147,13 @@ Dit algoritme onderneemt de volgende stappen:
 - **5b.1**: Deze uitkomst wordt gebruikt als exponent voor de formule probability = math.exp(uitkomst). Deze genereert een kans tussen de 0 en 1.  
 - **5b.2**: Het algoritme genereert een random kansberekening tussen 0 en 1. Als deze random kansberekening groter is dan je kansberekening bij 5b.1, wordt er geen aanpassing gedaan. Als deze kleiner is, wordt het huisje op de nieuwe locatie geplaatst. In dit geval is deze locatie slechter voor de totale uitkomst. Des te langer het algoritme draait, des te kleiner de kans is dat verslechteringen worden geaccepteerd.
 - **6**: De temperatuur variable wordt bijgewerkt aan de hand van de formule temperatuur - (temperature / iteraties).  
+- **7**: Dit proces wordt 50.000 keer herhaald. Na 50.000 iteraties stagneert de verhoging van de totale opbrengst. 
 - **8**: Het programma loopt over alle huizen en controleert of het rotaten van de huizen een hogere value op levert. 
 
 Als je alleen het Simulated Annealing algoritme wil runnen, dien je de volgende code te **de**commenten in main.py
 <details>
     <summary> Klik hier om de code te zien </summary>
   
-    # Run the simulated annealing and print the solution
     sim_al = SimulatedAnnealing(map)
     map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     solution = sim_al.value
