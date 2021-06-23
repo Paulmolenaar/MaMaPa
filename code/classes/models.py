@@ -4,7 +4,7 @@ import math
 
 WIDTH_MAX  = 180
 HEIGHT_MAX = 160
-random.seed(1243546)
+random.seed(11111111222222222233333333)
 class House():
 
     # The house class calculates the atributes of hte houses passed on to this class
@@ -68,10 +68,10 @@ class House():
         self.coordinates = self.to_coordinates(self.bottom_left)
 
         # CHeck if rotated house is on the map
-        if (self.bottom_left[0] < 0 or self.bottom_left[0] + self.width > WIDTH_MAX):
+        if (self.bottom_left[0] - self.min_distance < 0 or self.bottom_left[0] + self.min_distance + self.width > WIDTH_MAX):
             return False
 
-        if (self.bottom_left[1] < 0 or self.bottom_left[1] + self.length > HEIGHT_MAX):
+        if (self.bottom_left[1] - self.min_distance < 0 or self.bottom_left[1] + self.min_distance + self.length > HEIGHT_MAX):
             return False
 
         # Check if the rotated house intersects with water or another house
