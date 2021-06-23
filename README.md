@@ -75,6 +75,24 @@ Dit algoritme onderneemt de volgende stappen:
 - **5**: Mits dit niet gebeurt wordt het huis geplaatst, anders genereert het algoritme een nieuwe coördinaat om vervolgens terug te keren naar stap 4. 
 - **6**: Dit proces wordt herhaald tot alle 20, 40 of 60 huizen geplaatst zijn.
 
+Als je alleen het random algoritme wil runnen, dien je de volgende code te commenten in main.py
+
+<details>
+```
+    # Run the hill climber and print that solution
+    # hillclimb = HillClimber(map)
+    # map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    # solution = hillclimb.value
+    # print('Algoritm solution: ', solution)
+
+    # Run the simulated annealing and print the solution
+    sim_al = SimulatedAnnealing(map)
+    map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
+    solution = sim_al.value
+    print('Algoritm solution: ', solution)
+```
+  </details>
+
 ### Resultaten Random algoritme
 
 Hieronder worden de visualizaties uiteengezet in respectievelijk de wijk 1, 2 en 3 volgorde. Deze resultaten kunnen gerund worden middels het weghalen van de hillclimber en simulated annealing functie in main.py.
