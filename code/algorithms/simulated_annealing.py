@@ -83,6 +83,7 @@ class SimulatedAnnealing(HillClimber):
 
             # Accept if the new map is better
             self.check_solution(new_map)
-
+            
+        # Attempts to rotate all houses
         self.iterate_rotations()
         return self.map
