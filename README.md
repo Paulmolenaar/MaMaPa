@@ -44,6 +44,7 @@ Het programma genereert de volgende output:
 - **Random Solution**: De opbrengst value van de plattegrond, gerund door het random algoritme (baseline algoritme)
 - **Iteration**: Het programma iterateert tot de waarde van de constante ITERATIONS_AMOUNT. Deze waarde print de iteraties met interval van 1000. 
 - **Current value**:  Deze waarde print bij elke 1000 iterates de opbrengst van de totale plattegrond.
+- **i**:  Het programma iterateert 2000 keer een swap_house functie. Deze waarde print de iteraties met interval van 1000.
 - **Algoritm solution**: Print de uiteindelijke waarde na de laatste iteratie. 
 - **Time**: Weergeeft de tijd in milliseconden hoe lang het programma gedraaid heeft tot de solution.
 
