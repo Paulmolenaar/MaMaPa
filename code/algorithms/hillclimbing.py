@@ -171,7 +171,8 @@ class HillClimber:
                 print(f'i {i}/{2000}, current value: {self.value}') if verbose else None
             my_houses = random.sample(select_houses, 2)
             self.swap_house(new_map, my_houses)
-
+            
+        # Rotate all houses
         self.iterate_rotations()
 
         return self.map
