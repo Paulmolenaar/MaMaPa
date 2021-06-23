@@ -81,13 +81,11 @@ Als je alleen het random algoritme wil runnen, dien je de volgende code te comme
 <details>
     <summary> Klik hier om de code te zien </summary>
   
-    # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
     map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     solution = hillclimb.value
     print('Algoritm solution: ', solution)
 
-    # Run the simulated annealing and print the solution
     sim_al = SimulatedAnnealing(map)
     map = sim_al.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
     solution = sim_al.value
