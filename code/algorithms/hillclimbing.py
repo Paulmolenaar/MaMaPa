@@ -128,7 +128,7 @@ class HillClimber:
         if intersect == False:
             self.check_solution(new_map)
 
-
+    # Attempts to rotate all houses 90 degrees
     def iterate_rotations(self):
         for i in range(0,len(self.map.all_houses)):
             test_map = copy.deepcopy(self.map)
@@ -168,11 +168,10 @@ class HillClimber:
         for i in range(2000):
             new_map = copy.deepcopy(self.map)
             if i % 1000 == 0:
-                print(f'i {i}/{iterations}, current value: {self.value}')
+                print(f'i {i}/{iterations}, current value: {self.value}') if verbose else None
             my_houses = random.sample(select_houses, 2)
             self.swap_house(new_map, my_houses)
-        print("swap ", self.value)
 
         self.iterate_rotations()
-        print("rotate ", self.value)
+
         return self.map

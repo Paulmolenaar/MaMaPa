@@ -26,7 +26,7 @@ class SimulatedAnnealing(HillClimber):
         new_value = new_map.total_cost()
         old_value = self.value
 
-        # Calculate the probability of accepting this new graph
+        # Calculate the probability of accepting this new map
         delta = (new_value - old_value)
         if delta  > 0:
             probability = 1
@@ -35,7 +35,7 @@ class SimulatedAnnealing(HillClimber):
             probability = math.exp(a)
 
 
-        # Pull a random number between 0 and 1 and see if we accept the graph, if so, update the map
+        # Pull a random number between 0 and 1 and see if we accept the map, if so, update the map
         pull = random.random()
         if pull < probability:
             self.map = new_map
@@ -44,6 +44,7 @@ class SimulatedAnnealing(HillClimber):
         # Update the temperature
         self.update_temperature()
 
+    # Attempts to rotate all houses 90 degrees
     def iterate_rotations(self):
         for i in range(0,len(self.map.all_houses)):
             test_map = copy.deepcopy(self.map)
@@ -51,17 +52,18 @@ class SimulatedAnnealing(HillClimber):
                 continue
 
 
-            # rotate house, check if profit gets higher
+            # Rotate house, check if profit gets higher
             if (test_map.all_houses[i].rotate(test_map.all_waters)):
                 self.hill_check_solution(test_map)
             else:
                 continue
-
+    
+    # Check solution for rotate function
     def hill_check_solution(self, new_map):
         new_value = new_map.total_cost()
         old_value = self.value
 
-        # We are looking for maps that cost less, so replace the map if the costs are higher
+        # We are looking for maps that cost more, so replace the map if the costs are higher
         if new_value >= old_value:
             self.map = new_map
             self.value = new_value
@@ -75,7 +77,7 @@ class SimulatedAnnealing(HillClimber):
                 # Nice trick to only print if variable is set to True
                 print(f'Iteration {iteration}/{iterations}, current value: {self.value}') if verbose else None
 
-            # Create a copy of the old graph to simulate the change
+            # Create a copy of the old map to simulate the change
             new_map = copy.deepcopy(self.map)
             self.mutate_map(new_map, number_of_houses=mutate_houses_number)
 
