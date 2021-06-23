@@ -79,6 +79,7 @@ Als je alleen het random algoritme wil runnen, dien je de volgende code te comme
 
 <details>
     <summary> Klik hier om de code te zien </summary>
+  
     # Run the hill climber and print that solution
     hillclimb = HillClimber(map)
     map = hillclimb.run(ITERATIONS_AMOUNT, mutate_houses_number=1)
